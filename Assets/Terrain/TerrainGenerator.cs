@@ -4,6 +4,7 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 
 public class TerrainMeshGenerator : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class TerrainMeshGenerator : MonoBehaviour
     public TerrainMeshVariables meshVariables;
     public TerrainHeightmapVariables heightmapVariables;
     public Gradient heightmapGradient;
+    public GameObject propsGenerator;
+    public GameObject player;
 
     private MeshCollider meshCollider;
 
@@ -30,6 +33,9 @@ public class TerrainMeshGenerator : MonoBehaviour
     private void Start()
     {
         GenerateMap();
+        this.AddComponent<MeshCollider>();
+        propsGenerator.GetComponent<PropsGenerator>().Generate();
+        player.GetComponent<PlayerSpawn>().SpawnPlayer();
         meshCollider = GetComponent<MeshCollider>();
         meshCollider.sharedMesh = meshFilter.mesh;
     }

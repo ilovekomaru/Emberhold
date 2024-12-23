@@ -14,26 +14,14 @@ public class PropsGenerator : MonoBehaviour
     public PrefabVariation prefabVar;
 
 
-    public void OnValidate()
-    {
-        Generate();
-    }
-
-
-    private void Start()
-    {
-        Generate();
-    }
-
-
     public void Generate()
     {
         Clear();
 
         for (int i = 0; i < raySett.density; i++)
         {
-            float sampleX = Mathf.Clamp(Mathf.PerlinNoise(i * raySett.seed, i * raySett.seed - 1), raySett.xRange.x, raySett.xRange.y);
-            float sampleY = Mathf.Clamp(Mathf.PerlinNoise(i * raySett.seed, i * raySett.seed - 1), raySett.xRange.x, raySett.xRange.y);
+            float sampleX = UnityEngine.Random.Range(raySett.xRange.x, raySett.xRange.y);
+            float sampleY = UnityEngine.Random.Range(raySett.zRange.x, raySett.zRange.y);
             Vector3 rayStart = new Vector3(sampleX, raySett.maxHeight, sampleY);
 
             if(!Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, Mathf.Infinity))
