@@ -10,6 +10,8 @@ public class Jump : MonoBehaviour
     GroundCheck groundCheck;
 
 
+
+
     void Reset()
     {
         // Try to get groundCheck.

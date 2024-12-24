@@ -17,7 +17,6 @@ public class GroundCheck : MonoBehaviour
     Vector3 RaycastOrigin => transform.position + Vector3.up * OriginOffset;
     float RaycastDistance => distanceThreshold + OriginOffset;
 
-
     void LateUpdate()
     {
         // Check if we are grounded now.

@@ -17,6 +17,7 @@ public class TerrainMeshGenerator : MonoBehaviour
     public GameObject propsGenerator;
     public GameObject player;
 
+
     private MeshCollider meshCollider;
 
     private void Awake()
@@ -71,6 +72,9 @@ public struct HeightMapGenerator : IJobParallelFor
     private readonly TerrainMeshVariables _meshVariables;
     private readonly TerrainHeightmapVariables _heightmapVariables;
     [NativeDisableParallelForRestriction] private NativeArray<Color> _gradient;
+    [NativeDisableParallelForRestriction] private int _baseRadius;
+    [NativeDisableParallelForRestriction] private float _baseHeight;
+    [NativeDisableParallelForRestriction] private int _baseTransRadius;
 
 
     public HeightMapGenerator(TerrainMeshVariables mv, TerrainHeightmapVariables hv, NativeArray<Color> grad)
@@ -80,6 +84,9 @@ public struct HeightMapGenerator : IJobParallelFor
         _colMap = new NativeArray<Color>(_meshVariables.TotalVerts, Allocator.TempJob);
         _heightMap = new NativeArray<float>(_meshVariables.TotalVerts, Allocator.TempJob);
         _gradient = grad;
+        _baseRadius = hv.baseRadius;
+        _baseHeight = hv.baseHeight;
+        _baseTransRadius = hv.baseTransRadius;
     }
 
     public void Execute(int threadIndex)
@@ -87,14 +94,53 @@ public struct HeightMapGenerator : IJobParallelFor
         float x = threadIndex / /*(float)*/(_meshVariables.terrainMeshDetail + 1);
         float y = threadIndex % (_meshVariables.terrainMeshDetail + 1);
         float2 pos = new float2(x, y);
+        float h;
 
-        float h = Mathf.Clamp((OctavedSimplexNoise(pos, _heightmapVariables.seed) + OctavedRidgeNoise(pos, _heightmapVariables.seed)) / 2f * FalloffMap(pos) * _meshVariables.height, _heightmapVariables.waterLevel, 1000);
+        if (isCenter(threadIndex))
+        {
+            h = _baseHeight;
+        }
+        else if (isNearCenter(threadIndex))
+        {
+            h = Mathf.Clamp(_baseHeight * (float)0.2 + Mathf.Clamp((OctavedSimplexNoise(pos, _heightmapVariables.seed) + OctavedRidgeNoise(pos, _heightmapVariables.seed)) / 2f * FalloffMap(pos) * _meshVariables.height, _heightmapVariables.waterLevel, 1000) * (float)0.8, _heightmapVariables.baseHeight - 10, _heightmapVariables.baseHeight + 10);
+        }
+        else
+        {
+            h = Mathf.Clamp((OctavedSimplexNoise(pos, _heightmapVariables.seed) + OctavedRidgeNoise(pos, _heightmapVariables.seed)) / 2f * FalloffMap(pos) * _meshVariables.height, _heightmapVariables.waterLevel, 1000);
+        }
 
         _heightMap[threadIndex] = h / _meshVariables.TileEdgeLength;
         _colMap[threadIndex] = _gradient[Mathf.Clamp(Mathf.RoundToInt(h), 0, 99)];
     }
 
     public Maps ReturnAndDispose() => new Maps(_heightMap, _colMap);
+
+
+    bool isCenter(int index)
+    {
+        if (index < Mathf.Sqrt(_meshVariables.TotalVerts) * (Mathf.Sqrt(_meshVariables.TotalVerts) / 2 - _baseRadius))
+            return false;
+        if (index > Mathf.Sqrt(_meshVariables.TotalVerts) * (Mathf.Sqrt(_meshVariables.TotalVerts) / 2 + _baseRadius))
+            return false;
+        if (index % Mathf.Sqrt(_meshVariables.TotalVerts) < Mathf.Sqrt(_meshVariables.TotalVerts) / 2 - _baseRadius)
+            return false;
+        if (index % Mathf.Sqrt(_meshVariables.TotalVerts) > Mathf.Sqrt(_meshVariables.TotalVerts) / 2 + _baseRadius)
+            return false;
+        return true;
+    }
+
+    bool isNearCenter(int index)
+    {
+        if (index < Mathf.Sqrt(_meshVariables.TotalVerts) * (Mathf.Sqrt(_meshVariables.TotalVerts) / 2 - _baseRadius - _baseTransRadius))
+            return false;
+        if (index > Mathf.Sqrt(_meshVariables.TotalVerts) * (Mathf.Sqrt(_meshVariables.TotalVerts) / 2 + _baseRadius + _baseTransRadius))
+            return false;
+        if (index % Mathf.Sqrt(_meshVariables.TotalVerts) < Mathf.Sqrt(_meshVariables.TotalVerts) / 2 - _baseRadius - _baseTransRadius)
+            return false;
+        if (index % Mathf.Sqrt(_meshVariables.TotalVerts) > Mathf.Sqrt(_meshVariables.TotalVerts) / 2 + _baseRadius + _baseTransRadius)
+            return false;
+        return true;
+    }
 
     float OctavedRidgeNoise(float2 pos, int seed)
     {
@@ -238,6 +284,9 @@ public struct TerrainHeightmapVariables
     public float falloffSteepness, falloffOffset;
     [Header("Extras")]
     public float waterLevel;
+    public int baseRadius;
+    public float baseHeight;
+    public int baseTransRadius;
 }
 
 public struct Maps
