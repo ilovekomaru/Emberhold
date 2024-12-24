@@ -20,8 +20,8 @@ public class SandTerrainGenerator : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        //if (Instance == null) Instance = this;
+        //else Destroy(gameObject);
     }
 
     public void OnValidate()
@@ -32,7 +32,6 @@ public class SandTerrainGenerator : MonoBehaviour
     private void Start()
     {
         GenerateMap();
-        this.AddComponent<MeshCollider>();
         meshCollider = GetComponent<MeshCollider>();
         meshCollider.sharedMesh = meshFilter.mesh;
     }
@@ -70,7 +69,7 @@ public struct SandHeightMapGenerator : IJobParallelFor
 
     public void Execute(int threadIndex)
     {
-        float x = threadIndex / /*(float)*/(_meshVariables.terrainMeshDetail + 1);
+        float x = threadIndex / (_meshVariables.terrainMeshDetail + 1);
         float y = threadIndex % (_meshVariables.terrainMeshDetail + 1);
         float2 pos = new float2(x, y);
         float h;
@@ -81,7 +80,12 @@ public struct SandHeightMapGenerator : IJobParallelFor
         }
         else
         {
-            h = -10;
+            if (x < _meshVariables.terrainMeshDetail / 2)
+                x = _meshVariables.terrainMeshDetail / 2;
+            if (y < _meshVariables.terrainMeshDetail / 2)
+                y = _meshVariables.terrainMeshDetail / 2;
+            pos = new float2(x, y);
+            h = calculateHeight(pos);
         }
 
         _heightMap[threadIndex] = h;
@@ -91,15 +95,19 @@ public struct SandHeightMapGenerator : IJobParallelFor
 
     bool isIsland(int index)
     {
-        if (index < Mathf.Sqrt(_meshVariables.TotalVerts) * (Mathf.Sqrt(_meshVariables.TotalVerts) / 2 - _heightmapVariables.islandRadius))
-            return false;
         if (index > Mathf.Sqrt(_meshVariables.TotalVerts) * (Mathf.Sqrt(_meshVariables.TotalVerts) / 2 + _heightmapVariables.islandRadius))
-            return false;
-        if (index % Mathf.Sqrt(_meshVariables.TotalVerts) < Mathf.Sqrt(_meshVariables.TotalVerts) / 2 - _heightmapVariables.islandRadius)
             return false;
         if (index % Mathf.Sqrt(_meshVariables.TotalVerts) > Mathf.Sqrt(_meshVariables.TotalVerts) / 2 + _heightmapVariables.islandRadius)
             return false;
         return true;
+    }
+
+    float calculateHeight(float2 pos)
+    {;
+        float h = 0;
+        h += pos.x;
+        h += pos.y;
+        return h * _heightmapVariables.height + 10;
     }
 }
 
@@ -155,5 +163,5 @@ public struct BiomeMapsFill : IJobParallelFor
 public struct SandHeightMapVariables
 {
     public int islandRadius;
-    public float grad;
+    public float height;
 }

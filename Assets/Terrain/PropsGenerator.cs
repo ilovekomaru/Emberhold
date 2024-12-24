@@ -18,7 +18,7 @@ public class PropsGenerator : MonoBehaviour
     public PrefabVariation prefabVar;
 
 
-    public void Generate()
+    public void Execute()
     {
         Clear();
 
@@ -32,6 +32,12 @@ public class PropsGenerator : MonoBehaviour
                 continue;
 
             if(hit.point.y < raySett.minHeight)
+                continue;
+
+            if (hit.point.x > raySett.xRangeException.x && hit.point.x < raySett.xRangeException.y)
+                continue;
+
+            if (hit.point.z > raySett.zRangeException.x && hit.point.z < raySett.zRangeException.y)
                 continue;
 
             GameObject instantiatedPrefab = (GameObject)PrefabUtility.InstantiatePrefab(prefabs[i % prefabs.Count], transform);
@@ -64,7 +70,9 @@ public class PropsGenerator : MonoBehaviour
         public float minHeight;
         public float maxHeight;
         public Vector2 xRange;
+        public Vector2 xRangeException;
         public Vector2 zRange;
+        public Vector2 zRangeException;
     }
     [Serializable]
     public struct PrefabVariation
