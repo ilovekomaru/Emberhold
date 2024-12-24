@@ -10,11 +10,13 @@ public abstract class Spell
     public string Name { get; set; }
     public string Description { get; set; }
     public bool isSizing { get; set; }
-    public List<Rune> runes { get; set; }
-    public List<EffectRune> effects { get; set; }
-    public List<TargetRune> targets { get; set; }
+    //public List<Rune> runes { get; set; }
+    //public List<EffectRune> effects { get; set; }
+    //public List<TargetRune> targets { get; set; }
 
-    public Spell(string name, string description, List<Rune> runes)
+    public Rune[] runes { get; set; }
+
+    public Spell(string name, string description, Rune[] runes)
     {
         Name = name;
         Description = description;
@@ -23,20 +25,36 @@ public abstract class Spell
         foreach (var rune in runes)
         {
             ManaCost += rune.ManaCost;
+            if (rune.isSizing)
+            {
+                this.isSizing = true;
+            }
         }
     }
 
-    public Spell(string name, List<Rune> runes)
+    public Spell(string name, Rune[] runes)
     {
         Name = name;
         this.runes = runes;
+
+        foreach (var rune in runes)
+        {
+            ManaCost += rune.ManaCost;
+            if (rune.isSizing)
+            {
+                this.isSizing = true;
+            }
+        }
     }
 
     public void ActivateSpell(int givenMana)
     {
         if (givenMana >= ManaCost)
         {
-            foreach
+            var effect = (EffectRune)runes[0];
+            var target = (EffectRune)runes[1];
+
+            effect.ActivateRune(givenMana, target);
         }
     }
 }

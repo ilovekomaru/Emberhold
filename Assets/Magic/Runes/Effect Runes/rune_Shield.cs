@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class rune_Shield : EffectRune
 {
@@ -13,14 +14,22 @@ public class rune_Shield : EffectRune
         Type = "Defense"; 
         Rarity = "Common";
         isSizing = true;
+
+        legalTargets = new List<TargetRune>()
+        {
+            new rune_SingleTarget()
+        };
     }
 
-    public override void Effect(GameObject target)
+    public override void EffectSingleTarget(GameObject target, int givenMana)
     {
-        target.GetComponent<CombatStats>().shield = 25; 
-    }
-    public override void EffectWithSizing(GameObject target, int givenMana)
-    {
-        target.GetComponent<CombatStats>().shield = 5*givenMana;
+        if (givenMana == ManaCost)
+        {
+            target.GetComponent<CombatStats>().shield = 25;
+        }
+        else if (givenMana > ManaCost && isSizing == true)
+        {
+            target.GetComponent<CombatStats>().shield = 5 * givenMana;
+        }
     }
 }

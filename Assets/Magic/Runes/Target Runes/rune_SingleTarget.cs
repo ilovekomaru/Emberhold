@@ -12,7 +12,5 @@ public class rune_SingleTarget : TargetRune
         ManaCost = 5;
         Type = "Target";
         Rarity = "Common";
-        isSizing = false;
     }
-
 }
