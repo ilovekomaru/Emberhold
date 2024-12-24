@@ -5,6 +5,7 @@ using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using JetBrains.Annotations;
 
 public class TerrainMeshGenerator : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class TerrainMeshGenerator : MonoBehaviour
     public MeshFilter meshFilter;
     public TerrainMeshVariables meshVariables;
     public TerrainHeightmapVariables heightmapVariables;
-    public Gradient heightmapGradient;
+    public BiomeVariables biomeVariables;
+    public Gradient biomeGradient;
     public GameObject propsGenerator;
     public GameObject player;
 
@@ -47,14 +49,18 @@ public class TerrainMeshGenerator : MonoBehaviour
 
         for (int i = 0; i < 100; i++)
         {
-            _gradientColorArray[i] = heightmapGradient.Evaluate(i / 100f);
+            _gradientColorArray[i] = biomeGradient.Evaluate(i / 100f);
         }
 
+        BiomeGenerator biomeGenerator = new BiomeGenerator(meshVariables, heightmapVariables, biomeVariables, _gradientColorArray);
+        biomeGenerator.Schedule(meshVariables.TotalVerts, 10000).Complete();
+        BiomeMaps _biomeMaps = biomeGenerator.ReturnAndDispose();
+    
         HeightMapGenerator heightmapGenerator = new HeightMapGenerator(meshVariables, heightmapVariables, _gradientColorArray);
         heightmapGenerator.Schedule(meshVariables.TotalVerts, 10000).Complete();
-        Maps _maps = heightmapGenerator.ReturnAndDispose();
+        HeightMap _heightMap = heightmapGenerator.ReturnAndDispose();
 
-        MeshGenerator meshGenerator = new MeshGenerator(meshVariables, _maps);
+        MeshGenerator meshGenerator = new MeshGenerator(meshVariables, _heightMap, _biomeMaps);
         meshGenerator.Schedule(meshVariables.terrainMeshDetail * meshVariables.terrainMeshDetail, 10000).Complete();
 
         meshFilter.mesh = meshGenerator.DisposeAndGetMesh();
@@ -64,11 +70,109 @@ public class TerrainMeshGenerator : MonoBehaviour
 }
 
 [BurstCompile]
+public struct BiomeGenerator : IJobParallelFor
+{
+    [NativeDisableParallelForRestriction] private NativeArray<int> _biomeMap;
+    private readonly TerrainMeshVariables _meshVariables;
+    private readonly TerrainHeightmapVariables _heightmapVariables;
+    private readonly BiomeVariables _biomeVariables;
+    [NativeDisableParallelForRestriction] private NativeArray<Color> _gradient;
+    [NativeDisableParallelForRestriction] private NativeArray<Color> _colMap;
+    [NativeDisableParallelForRestriction] private int _baseRadius;
+    [NativeDisableParallelForRestriction] private int _islandRadius;
+
+
+    public BiomeGenerator(TerrainMeshVariables mv, TerrainHeightmapVariables hv, BiomeVariables bv, NativeArray<Color> grad)
+    {
+        _meshVariables = mv;
+        _heightmapVariables = hv;
+        _biomeVariables = bv;
+        _biomeMap = new NativeArray<int>(_meshVariables.TotalVerts, Allocator.TempJob);
+        _colMap = new NativeArray<Color>(_meshVariables.TotalVerts, Allocator.TempJob);
+        _gradient = grad;
+        _baseRadius = bv.baseRadius;
+        _islandRadius = bv.islandRadius;
+    }
+
+    //Mathf.Clamp(Mathf.RoundToInt(BiomeNoise(pos, _biomeVariables.seed)), 0, 99);
+
+
+    public void Execute(int threadIndex)
+    {
+        float x = threadIndex / /*(float)*/(_meshVariables.terrainMeshDetail + 1);
+        float y = threadIndex % (_meshVariables.terrainMeshDetail + 1);
+        float2 pos = new float2(x, y);
+        int b = 0;
+        int c = 0;
+
+        if (isCenter(threadIndex))
+        {
+            b = 0;
+            c = 0;
+        }
+        else if (isNearCenter(threadIndex))
+        {
+            b = Mathf.Clamp(Mathf.RoundToInt(BiomeNoise(pos, _biomeVariables.seed, 3f)), 0, 3);
+            c = Mathf.Clamp(Mathf.RoundToInt(BiomeNoise(pos, _biomeVariables.seed, 99f)), 0, 99);
+        }
+        else
+        {
+            b = 4;
+            c = 99;
+        }
+
+        _biomeMap[threadIndex] = b;
+        _colMap[threadIndex] = _gradient[c];
+    }
+
+    public BiomeMaps ReturnAndDispose() => new BiomeMaps(_biomeMap, _colMap);
+    public Color getColor(int index)
+    {
+        return _colMap[index];
+    }
+
+    float BiomeNoise(float2 pos, int seed, float amplitude)
+    {
+        float noiseVal = 0, freq = _biomeVariables.noiseScale;
+
+        float v = (noise.snoise((pos + seed) / freq / _biomeVariables.biomeMeshDetail) + 1) / 2f;
+        noiseVal += v * amplitude;
+        return noiseVal;
+    }
+
+
+    bool isCenter(int index)
+    {
+        if (index < Mathf.Sqrt(_meshVariables.TotalVerts) * (Mathf.Sqrt(_meshVariables.TotalVerts) / 2 - _baseRadius))
+            return false;
+        if (index > Mathf.Sqrt(_meshVariables.TotalVerts) * (Mathf.Sqrt(_meshVariables.TotalVerts) / 2 + _baseRadius))
+            return false;
+        if (index % Mathf.Sqrt(_meshVariables.TotalVerts) < Mathf.Sqrt(_meshVariables.TotalVerts) / 2 - _baseRadius)
+            return false;
+        if (index % Mathf.Sqrt(_meshVariables.TotalVerts) > Mathf.Sqrt(_meshVariables.TotalVerts) / 2 + _baseRadius)
+            return false;
+        return true;
+    }
+
+    bool isNearCenter(int index)
+    {
+        if (index < Mathf.Sqrt(_meshVariables.TotalVerts) * (Mathf.Sqrt(_meshVariables.TotalVerts) / 2 - _islandRadius))
+            return false;
+        if (index > Mathf.Sqrt(_meshVariables.TotalVerts) * (Mathf.Sqrt(_meshVariables.TotalVerts) / 2 + _islandRadius))
+            return false;
+        if (index % Mathf.Sqrt(_meshVariables.TotalVerts) < Mathf.Sqrt(_meshVariables.TotalVerts) / 2 - _islandRadius)
+            return false;
+        if (index % Mathf.Sqrt(_meshVariables.TotalVerts) > Mathf.Sqrt(_meshVariables.TotalVerts) / 2 + _islandRadius)
+            return false;
+        return true;
+    }
+}
+
+[BurstCompile]
 public struct HeightMapGenerator : IJobParallelFor
 {
 
     [NativeDisableParallelForRestriction,] private NativeArray<float> _heightMap;
-    [NativeDisableParallelForRestriction] private NativeArray<Color> _colMap;
     private readonly TerrainMeshVariables _meshVariables;
     private readonly TerrainHeightmapVariables _heightmapVariables;
     [NativeDisableParallelForRestriction] private NativeArray<Color> _gradient;
@@ -81,7 +185,6 @@ public struct HeightMapGenerator : IJobParallelFor
     {
         _meshVariables = mv;
         _heightmapVariables = hv;
-        _colMap = new NativeArray<Color>(_meshVariables.TotalVerts, Allocator.TempJob);
         _heightMap = new NativeArray<float>(_meshVariables.TotalVerts, Allocator.TempJob);
         _gradient = grad;
         _baseRadius = hv.baseRadius;
@@ -109,11 +212,11 @@ public struct HeightMapGenerator : IJobParallelFor
             h = Mathf.Clamp((OctavedSimplexNoise(pos, _heightmapVariables.seed) + OctavedRidgeNoise(pos, _heightmapVariables.seed)) / 2f * FalloffMap(pos) * _meshVariables.height, _heightmapVariables.waterLevel, 1000);
         }
 
+
         _heightMap[threadIndex] = h / _meshVariables.TileEdgeLength;
-        _colMap[threadIndex] = _gradient[Mathf.Clamp(Mathf.RoundToInt(h), 0, 99)];
     }
 
-    public Maps ReturnAndDispose() => new Maps(_heightMap, _colMap);
+    public HeightMap ReturnAndDispose() => new HeightMap(_heightMap);
 
 
     bool isCenter(int index)
@@ -196,15 +299,17 @@ public struct MeshGenerator : IJobParallelFor
     [NativeDisableParallelForRestriction] private NativeArray<Vector3> _verticies;
     [NativeDisableParallelForRestriction] private NativeArray<int> _triangleIndicies;
     private TerrainMeshVariables _meshVariables;
-    private Maps _maps;
+    private HeightMap _heightMap;
+    private BiomeMaps _biomeMaps;
 
-    public MeshGenerator(TerrainMeshVariables mv, Maps m)
+    public MeshGenerator(TerrainMeshVariables mv, HeightMap m, BiomeMaps b)
     {
         _meshVariables = mv;
 
         _verticies = new NativeArray<Vector3>(_meshVariables.TotalVerts, Allocator.TempJob);
         _triangleIndicies = new NativeArray<int>(_meshVariables.TotalTriangles, Allocator.TempJob);
-        _maps = m;
+        _heightMap = m;
+        _biomeMaps = b;
     }
 
     public void Execute(int threadIndex)
@@ -225,10 +330,10 @@ public struct MeshGenerator : IJobParallelFor
         int c = b + _meshVariables.terrainMeshDetail;
         int d = c + 1;
 
-        _verticies[a] = new Vector3(x + 0, _maps.HeightMap[a], y + 0) * _meshVariables.TileEdgeLength;
-        _verticies[b] = new Vector3(x + 0, _maps.HeightMap[b], y + 1) * _meshVariables.TileEdgeLength;
-        _verticies[c] = new Vector3(x + 1, _maps.HeightMap[c], y + 0) * _meshVariables.TileEdgeLength;
-        _verticies[d] = new Vector3(x + 1, _maps.HeightMap[d], y + 1) * _meshVariables.TileEdgeLength;
+        _verticies[a] = new Vector3(x + 0, _heightMap.Height[a], y + 0) * _meshVariables.TileEdgeLength;
+        _verticies[b] = new Vector3(x + 0, _heightMap.Height[b], y + 1) * _meshVariables.TileEdgeLength;
+        _verticies[c] = new Vector3(x + 1, _heightMap.Height[c], y + 0) * _meshVariables.TileEdgeLength;
+        _verticies[d] = new Vector3(x + 1, _heightMap.Height[d], y + 1) * _meshVariables.TileEdgeLength;
 
         _triangleIndicies[threadIndex * 6 + 0] = a;
         _triangleIndicies[threadIndex * 6 + 1] = b;
@@ -244,7 +349,7 @@ public struct MeshGenerator : IJobParallelFor
         var m = new Mesh();
 
         m.SetVertices(_verticies);
-        m.SetColors(_maps.ColorMap);
+        m.SetColors(_biomeMaps.Color);
         m.triangles = _triangleIndicies.ToArray();
 
         m.RecalculateNormals();
@@ -252,7 +357,8 @@ public struct MeshGenerator : IJobParallelFor
         // Away with the memory hoarding!! (dispose the native arrays from memory)
         _verticies.Dispose();
         _triangleIndicies.Dispose();
-        _maps.Dispose();
+        _heightMap.Dispose();
+        _biomeMaps.Dispose();
 
         return m;
     }
@@ -288,21 +394,46 @@ public struct TerrainHeightmapVariables
     public float baseHeight;
     public int baseTransRadius;
 }
-
-public struct Maps
+[Serializable]
+public struct BiomeVariables
 {
-    [NativeDisableParallelForRestriction] public NativeArray<float> HeightMap;
-    [NativeDisableParallelForRestriction] public NativeArray<Color> ColorMap;
+    public float noiseScale;
+    public int seed;
+    public float biomeMeshDetail;
+    public int baseRadius;
+    public int islandRadius;
+}
 
-    public Maps(NativeArray<float> h, NativeArray<Color> c)
+public struct HeightMap
+{
+    [NativeDisableParallelForRestriction] public NativeArray<float> Height;
+
+    public HeightMap(NativeArray<float> h)
     {
-        HeightMap = h;
-        ColorMap = c;
+        Height = h;
     }
 
     public void Dispose()
     {
-        ColorMap.Dispose();
-        HeightMap.Dispose();
+        Height.Dispose();
     }
+}
+
+public struct BiomeMaps
+{
+    [NativeDisableParallelForRestriction] public NativeArray<int> Biome;
+    [NativeDisableParallelForRestriction] public NativeArray<Color> Color;
+
+    public BiomeMaps(NativeArray<int> b, NativeArray<Color> c)
+    {
+        Biome = b;
+        Color = c;
+    }
+
+    public void Dispose()
+    {
+        Biome.Dispose();
+        Color.Dispose();
+    }
+
 }
