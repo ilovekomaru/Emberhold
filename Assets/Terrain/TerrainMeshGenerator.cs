@@ -6,6 +6,8 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using JetBrains.Annotations;
+using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 public class TerrainMeshGenerator : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class TerrainMeshGenerator : MonoBehaviour
     public TerrainHeightmapVariables heightmapVariables;
     public BiomeVariables biomeVariables;
     public Gradient biomeGradient;
+    public NavMeshSurface navMeshSurface;
 
 
 
@@ -30,12 +33,14 @@ public class TerrainMeshGenerator : MonoBehaviour
         GenerateMap();
     }
 
-    public void Execute()
+    public void Execute(bool b)
     {
         MeshCollider meshCollider;
         GenerateMap();
         meshCollider = this.AddComponent<MeshCollider>();
         meshCollider.sharedMesh = meshFilter.mesh;
+        if(b)
+            navMeshSurface.BuildNavMesh();
     }
 
     public void GenerateMap()

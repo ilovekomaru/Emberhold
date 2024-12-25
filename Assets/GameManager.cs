@@ -14,6 +14,7 @@ public class StartGame : MonoBehaviour
 
     public TerrainMeshGenerator terrainMeshGenerator;
     public PropsGenerator propsGenerator;
+    public bool generateNavMesh;
     
 
     private void Start()
@@ -27,11 +28,9 @@ public class StartGame : MonoBehaviour
         terrainMeshGenerator.heightmapVariables.seed = seedValues.seed;
         terrainMeshGenerator.biomeVariables.seed = seedValues.seed;
 
-        terrainMeshGenerator.Execute();
+        terrainMeshGenerator.Execute(generateNavMesh);
         propsGenerator.Execute();
         playerSpawn.Execute(playerSpawnVariables.pos);
-
-
     }
 
 
