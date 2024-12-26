@@ -76,27 +76,34 @@ public class CombatStats : MonoBehaviour
             damage *= (int)(1 - magicalResist);
         }
 
-        if (shield > 0)
+        if ((damageType != "Falling"))
         {
-            if (shield >= damage)
+            if (shield > 0)
             {
-                shield -= damage;
+                if (shield >= damage)
+                {
+                    shield -= damage;
+                }
+                else
+                {
+                    damage -= shield;
+                    shield = 0;
+                    HP -= damage;
+                }
             }
             else
             {
-                damage -= shield;
-                shield = 0;
                 HP -= damage;
+
+                if (HP < 0)
+                {
+                    HP = 0;
+                }
             }
         }
         else
         {
             HP -= damage;
-
-            if (HP < 0)
-            {
-                HP = 0;
-            }
         }
     }
 

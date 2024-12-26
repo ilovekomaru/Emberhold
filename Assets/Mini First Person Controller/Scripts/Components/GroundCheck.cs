@@ -3,6 +3,12 @@
 [ExecuteInEditMode]
 public class GroundCheck : MonoBehaviour
 {
+    float timer = 0.0f;
+    public float fallingDamageMinTime;
+    public bool isCalculatingFallingDamage = false; 
+    public float fallingDamage; 
+    public float fallingDamageDependingOnTimeMultipliyer; 
+
     [Tooltip("Maximum distance from the ground.")]
     public float distanceThreshold = .15f;
 
@@ -31,7 +37,24 @@ public class GroundCheck : MonoBehaviour
 
         // Update isGrounded.
         isGrounded = isGroundedNow;
+
+        // Falling damage
+        if (!isGrounded)
+        {
+            timer += Time.deltaTime;
+            if (timer >= fallingDamageMinTime)
+            {
+                isCalculatingFallingDamage = true;
+            }
+        }
+        if (isCalculatingFallingDamage && isGrounded)
+        {
+            isCalculatingFallingDamage = false;
+            GetComponentInParent<CombatStats>().DealDamageToThis((int)(timer * fallingDamageDependingOnTimeMultipliyer), "Falling");
+            timer = 0;
+        }
     }
+
 
     void OnDrawGizmosSelected()
     {
