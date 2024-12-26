@@ -35,7 +35,7 @@ public class CombatStats : MonoBehaviour
 
     private void Update()
     {
-        while (HP != maxHP)
+        if (HP <= maxHP)
         {
             hpRestoreTimer += Time.deltaTime;
             if (hpRestoreTimer >= 1)
@@ -45,7 +45,7 @@ public class CombatStats : MonoBehaviour
             }
         }
 
-        while (MP != maxMP)
+        if (MP < maxMP)
         {
             mpRestoreTimer += Time.deltaTime;
             if (mpRestoreTimer >= 1)
@@ -74,6 +74,15 @@ public class CombatStats : MonoBehaviour
         else if (damageType == "Magical")
         {
             damage *= (int)(1 - magicalResist);
+        }
+        else if (damageType == "Falling")
+        {
+            HP -= damage;
+            if (HP < 0)
+            {
+                HP = 0;
+            }
+            return;
         }
 
         if (shield > 0)
