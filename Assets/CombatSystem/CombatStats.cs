@@ -5,24 +5,24 @@ using UnityEngine;
 
 public class CombatStats : MonoBehaviour
 {
-    public int HP = 100;
-    public int maxHP = 100;
+    public int HP;
+    public int maxHP;
     public int hpRecoveryPerSecond;
-    public int shield = 0;
+    public int shield;
 
-    public int attack = 10;
+    public int attack;
 
-    public float MP = 10;
-    public float maxMP = 10;
+    public float MP;
+    public float maxMP;
     public float mpRecoveryPerSecond;
 
-    public float physicalResist = 0;
-    public float magicalResist = 0;
-    public float buffs = 0;
+    public float physicalResist;
+    public float magicalResist;
+    public float buffs;
 
     public bool manualRecoveryPerSecond = false;
-    float hpRestoreTimer = 0;
-    float mpRestoreTimer = 0;
+    float hpRestoreTimer;
+    float mpRestoreTimer;
 
     private void Start()
     {
