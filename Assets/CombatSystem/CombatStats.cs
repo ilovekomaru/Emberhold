@@ -20,13 +20,13 @@ public class CombatStats : MonoBehaviour
     public float magicalResist = 0;
     public float buffs = 0;
 
-    public bool manualRecoveryperSecond = false;
+    public bool manualRecoveryPerSecond = false;
     float hpRestoreTimer = 0;
     float mpRestoreTimer = 0;
 
     private void Start()
     {
-        if (!manualRecoveryperSecond)
+        if (!manualRecoveryPerSecond)
         {
             hpRecoveryPerSecond = maxHP / 20;
             mpRecoveryPerSecond = maxMP / 100;
