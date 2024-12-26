@@ -18,12 +18,23 @@ public class GUIUpdater : MonoBehaviour
 
     void Start()
     {
-        
+        HP.value = playerCombatStats.HP;
+        MP.value = playerCombatStats.MP;
+
+        attack.text = playerCombatStats.attack.ToString();
+        physical_resist.text = playerCombatStats.physicalResist.ToString();
+        magical_resist.text = playerCombatStats.magicalResist.ToString();
+        buffs.text = playerCombatStats.buffs.ToString();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        HP.value = playerCombatStats.HP;
+        MP.value = playerCombatStats.MP;
+
+        attack.text = playerCombatStats.attack.ToString();
+        physical_resist.text = playerCombatStats.physicalResist.ToString();
+        magical_resist.text = playerCombatStats.magicalResist.ToString();
+        buffs.text = playerCombatStats.buffs.ToString();
     }
 }
