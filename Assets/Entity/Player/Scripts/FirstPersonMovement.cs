@@ -16,7 +16,7 @@ public class FirstPersonMovement : MonoBehaviour
     public float localRotation;
     public PlayerAnimationTriggers animationTriggers;
 
-    Rigidbody rigidbody;
+    Rigidbody rigidBody;
     float y;
 
     /// <summary> Functions to override movement speed. Will use the last added override. </summary>
@@ -27,7 +27,7 @@ public class FirstPersonMovement : MonoBehaviour
     void Awake()
     {
         // Get the rigidbody on this.
-        rigidbody = GetComponent<Rigidbody>();
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
@@ -76,7 +76,7 @@ public class FirstPersonMovement : MonoBehaviour
         playerModel.transform.rotation = Quaternion.AngleAxis(y, Vector3.up);
 
         // Apply movement.
-        rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
+        rigidBody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidBody.velocity.y, targetVelocity.y);
     }
 
     void Attack()
