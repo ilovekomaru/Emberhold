@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
     public List<InventoryItem> InventoryItems;
+    public UnityEvent<GameObject> activeObjectChanged;
+    public GameObject nullModel;
     
     void Start()
     {
@@ -47,17 +50,33 @@ public class Inventory : MonoBehaviour
         InventoryItems.Add(newItem2);
     }
 
-    public GameObject GetActiveItem()
+    public void SetActiveItem(InventoryItem inventoryItem, bool noneItemActive = false)
     {
-        foreach (var item in InventoryItems)
+        if (noneItemActive)
         {
-            if (item.isActive)
+            for (int i = 0; i < InventoryItems.Count; i++)
             {
-                return item.item.Model;
+                InventoryItems[i] = new InventoryItem
+                {
+                    isActive = false,
+                    isFavorite = InventoryItems[i].isFavorite,
+                    count = InventoryItems[i].count,
+                    item = InventoryItems[i].item
+                };
+            }
+            activeObjectChanged.Invoke(nullModel);
+        }
+        else
+        {
+            foreach (var item in InventoryItems)
+            {
+                if (item.isActive)
+                {
+                    activeObjectChanged.Invoke(item.item.Model);
+                    return;
+                }
             }
         }
-
-        return null;
     }
 }
 
