@@ -68,12 +68,29 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            foreach (var item in InventoryItems)
+            for (int i = 0; i < InventoryItems.Count; i++)
             {
-                if (item.isActive)
+                if (InventoryItems[i].item.Name == inventoryItem.item.Name)
                 {
-                    activeObjectChanged.Invoke(item.item.Model);
-                    return;
+                    InventoryItems[i] = new InventoryItem
+                    {
+                        isActive = true,
+                        isFavorite = InventoryItems[i].isFavorite,
+                        count = InventoryItems[i].count,
+                        item = InventoryItems[i].item
+                    };
+
+                    activeObjectChanged.Invoke(InventoryItems[i].item.Model);
+                }
+                else
+                {
+                    InventoryItems[i] = new InventoryItem
+                    {
+                        isActive = false,
+                        isFavorite = InventoryItems[i].isFavorite,
+                        count = InventoryItems[i].count,
+                        item = InventoryItems[i].item
+                    };
                 }
             }
         }
