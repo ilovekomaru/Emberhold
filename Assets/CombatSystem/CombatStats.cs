@@ -24,7 +24,7 @@ public class CombatStats : MonoBehaviour
     float hpRestoreTimer;
     float mpRestoreTimer;
 
-    private void Start()
+    public void Start()
     {
         if (!manualRecoveryPerSecond)
         {
@@ -33,7 +33,7 @@ public class CombatStats : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void Update()
     {
         if (HP <= maxHP)
         {
@@ -118,9 +118,9 @@ public class CombatStats : MonoBehaviour
     {
         HP += healValue;
 
-        if (HP > maxHP)
-        {
-            HP = maxHP;
-        }
+        //if (HP > maxHP)
+        //{
+        //    HP = maxHP;
+        //}
     }
 }

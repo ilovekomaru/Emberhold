@@ -30,7 +30,7 @@ public class KeyboardForGUI : MonoBehaviour
             print(!keyLinking.isStayIfUnpressed);
         }
 
-        Cursor.visible = Input.GetKey(KeyCode.LeftAlt);
+        //Cursor.visible = Input.GetKey(KeyCode.LeftAlt);
     }
 }
 

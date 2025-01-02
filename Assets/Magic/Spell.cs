@@ -27,6 +27,8 @@ public class Spell
         this.Effects = effects;
         Owner = owner;
         Targets = new List<CombatStats>();
+
+        ManaForSizingRunes = new float[] { 1 };
         
         // Spell's ManaCost defining
         foreach (var effect in effects)
