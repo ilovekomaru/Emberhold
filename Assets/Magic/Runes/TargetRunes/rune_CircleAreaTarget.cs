@@ -12,7 +12,7 @@ public class rune_CircleAreaTarget : TargetRune
         Description = "Target is all in circle area with casting-time-defined radius";
         ManaCost = (int)(2 * radius);
         Type = "Target";
-        Rarity = "Common";
+        Rarity = "Uncommon";
         IsSizing = true;
         Radius = radius;
     }

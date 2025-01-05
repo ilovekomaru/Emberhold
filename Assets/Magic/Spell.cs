@@ -52,11 +52,19 @@ public class Spell
             if (TargetType.GetType() == typeof(rune_SelfTarget))
             {
                 Targets.Add(Owner.GetComponent<CombatStats>());
+                CheckIsOwnerIsTarget();
                 EffectOfSpell(givenMana);
             }
             else if (TargetType.GetType() == typeof(rune_CircleAreaTarget))
             {
-                // «апуск прицеливани€, ожидание ответа со списком CombatStats
+                // Ќе обращай внимани€ на название, пусть будет шар
+                CheckIsOwnerIsTarget();
+                EffectOfSpell(givenMana);
+            }
+            else if (TargetType.GetType() == typeof(rune_SquareAreaTarget))
+            {
+                // Ќе обращай внимани€ на название, пусть будет куб
+                CheckIsOwnerIsTarget();
                 EffectOfSpell(givenMana);
             }
         }
@@ -67,6 +75,14 @@ public class Spell
         for (int i = 0; i < Effects.Count; i++)
         {
             Effects[i].ActivateRune((int)(givenMana * ManaForSizingRunes[i]), Targets);
+        }
+    }
+
+    public void CheckIsOwnerIsTarget()
+    {
+        for (int i = 0; i < Targets.Count; i++)
+        {
+            Targets[i] = Targets[i].gameObject == Owner ? null : Targets[i];
         }
     }
 }
