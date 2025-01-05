@@ -21,7 +21,6 @@ public class TerrainMeshGenerator : MonoBehaviour
     public NavMeshSurface navMeshSurface;
 
 
-
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -55,7 +54,7 @@ public class TerrainMeshGenerator : MonoBehaviour
         BiomeGenerator biomeGenerator = new BiomeGenerator(meshVariables, heightmapVariables, biomeVariables, _gradientColorArray);
         biomeGenerator.Schedule(meshVariables.TotalVerts, 10000).Complete();
         BiomeMaps _biomeMaps = biomeGenerator.ReturnAndDispose();
-    
+        
         HeightMapGenerator heightmapGenerator = new HeightMapGenerator(meshVariables, heightmapVariables, _gradientColorArray);
         heightmapGenerator.Schedule(meshVariables.TotalVerts, 10000).Complete();
         HeightMap _heightMap = heightmapGenerator.ReturnAndDispose();
