@@ -10,6 +10,8 @@ public class Inventory : MonoBehaviour
     public List<InventoryItem> InventoryItems;
     public UnityEvent<GameObject> activeObjectChanged;
     public GameObject nullModel;
+    public int maxSize = 50;
+    public int currentSize = 0;
     
     void Start()
     {
@@ -18,36 +20,41 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        
+        currentSize = InventoryItems.Count;
     }
 
     public void AppendItemToInventory(Item item)
     {
-        for (int i = 0; i < InventoryItems.Count; i++)
+        if (currentSize < maxSize)
         {
-            if (InventoryItems[i].item.Type == "Resource" && item.Name == InventoryItems[i].item.Name)
+            for (int i = 0; i < InventoryItems.Count; i++)
             {
-                InventoryItem newItem = new InventoryItem
+                if (InventoryItems[i].item.Type == "Resource" && item.Name == InventoryItems[i].item.Name)
                 {
-                    isActive = false,
-                    isFavorite = InventoryItems[i].isFavorite,
-                    count = InventoryItems[i].count + 1,
-                    item = item
-                };
-                InventoryItems[i] = newItem;
-
-                return;
+                    InventoryItem newItem = new InventoryItem
+                    {
+                        isActive = false,
+                        isFavorite = InventoryItems[i].isFavorite,
+                        count = InventoryItems[i].count + 1,
+                        item = item
+                    };
+                    InventoryItems[i] = newItem;
+                    currentSize++;
+                    
+                    return;
+                }
             }
-        }
 
-        var newItem2 = new InventoryItem
-        {
-            isFavorite = false,
-            isActive = false,
-            count = 1, 
-            item = item
-        };
-        InventoryItems.Add(newItem2);
+            var newItem2 = new InventoryItem
+            {
+                isFavorite = false,
+                isActive = false,
+                count = 1,
+                item = item
+            };
+            InventoryItems.Add(newItem2);
+            currentSize++;
+        }
     }
 
     public void SetActiveItem(InventoryItem inventoryItem, bool noneItemActive = false)

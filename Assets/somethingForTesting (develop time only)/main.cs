@@ -9,10 +9,10 @@ public class main : MonoBehaviour
     public GameObject enemy;
     void Start()
     {
-        var spell = new Spell(new rune_SelfTarget(), new List<EffectRune> { new rune_Shield(), new rune_Damage() }, player);
-        spell.ManaForSizingRunes = new float[] { .20f , .80f };
+        var spell = new Spell(new rune_SelfTarget(), new List<EffectRune> { new rune_Shield(), new rune_Damage()}, player);
+        spell.ManaForSizingRunes = new float[] { .20f, .80f };
         print(spell.ManaCost);
-        spell.ActivateSpell(50);
+        spell.ActivateSpell(100);
     }
 
     float timer = 0;
@@ -20,15 +20,10 @@ public class main : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer > 5)
+        if (timer >= 10)
         {
-            var spell = new Spell
-                (
-                new rune_SelfTarget(),
-                new List<EffectRune>() { new rune_Healing() },
-                player
-                );
-            spell.ActivateSpell(15);
+            var spell = new Spell(new rune_SelfTarget(), new List<EffectRune> { new rune_LargeHealing() }, player);
+            spell.ActivateSpell(25);
         }
     }
 }

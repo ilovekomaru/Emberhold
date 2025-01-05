@@ -64,6 +64,11 @@ public class CombatStats : MonoBehaviour
         {
             MP = maxMP;
         }
+
+        if (HP < 0)
+        {
+            HP = 0;
+        }
     }
     public void DealDamageToThis(int damage, string damageType)
     {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,8 +11,9 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     public Inventory inventory;
-    public List<Row> rows;
+    public List<GameObject> iconsOfItem;
     public ScrollRect inventoryUI;
+    public TMP_Text inventorySpace;
 
     public void Start()
     {
@@ -19,18 +21,15 @@ public class InventoryUI : MonoBehaviour
     }
     private void Update()
     {
-        for (int i = 0; i < rows.Count; i++)
+        for (int i = 0; i < inventory.InventoryItems.Count; i++)
         {
-            //for (int j = 0; j < rows[i]; j++)
-            {
-                //iconsOfItems[i][j].GetComponent<Image>().enabled = false;
-            }
+            iconsOfItem[i].GetComponent<Image>().enabled = true;
         }
-    }
-}
+        for (int i = inventory.InventoryItems.Count; i < 50; i++)
+        {
+            iconsOfItem[i].GetComponent<Image>().enabled = false;
+        }
 
-[Serializable]
-public struct Row
-{
-    public GameObject[] iconOfItem;
+        inventorySpace.text = $"{inventory.currentSize}/{inventory.maxSize}";
+    }
 }

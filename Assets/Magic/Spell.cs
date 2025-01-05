@@ -19,7 +19,7 @@ public class Spell
 
     public TargetRune TargetType { get; set; }
     public List<EffectRune> Effects { get; set; }
-    public float[] ManaForSizingRunes { get; set; } // 4 позициb максимум; Проценты десятичной дробью, сумма - 1; сколько на каждую руну (из всех пяти) маны? 
+    public float[] ManaForSizingRunes { get; set; } // 4 позициb максимум; Проценты десятичной дробью, сумма - 1; сколько на каждую руну (из всех пяти) маны? Надо сделать поведение на случай, если руна не маштабируемая.
 
     public Spell(TargetRune targetType, List<EffectRune> effects, GameObject owner)
     {
@@ -44,12 +44,20 @@ public class Spell
         {
             givenMana -= TargetType.ManaCost;
 
+            //for (int i = 0; i < Effects.Count; i++)
+            //{
+
+            //}
+
             if (TargetType.GetType() == typeof(rune_SelfTarget))
             {
                 Targets.Add(Owner.GetComponent<CombatStats>());
-                Debug.Log(Targets[0]);
                 EffectOfSpell(givenMana);
-                return;
+            }
+            else if (TargetType.GetType() == typeof(rune_CircleAreaTarget))
+            {
+                // Запуск прицеливания, ожидание ответа со списком CombatStats
+                EffectOfSpell(givenMana);
             }
         }
     }
