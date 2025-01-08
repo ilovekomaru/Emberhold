@@ -11,6 +11,7 @@ public class CombatStats : MonoBehaviour
     public int shield;
 
     public int attack;
+    public Item Weapon;
 
     public float MP;
     public float maxMP;
@@ -111,7 +112,7 @@ public class CombatStats : MonoBehaviour
 
     public int CalculateDamageForOther()
     {
-        return attack * (int)(1 + buffs);
+        return (attack + Weapon.GetComponent<Item>().stats.DamageToEnemies) * (int)(1 + buffs);
     }
 
     public void RestoreHP(int healValue)
