@@ -19,7 +19,7 @@ public class Spell
 
     public TargetRune TargetType { get; set; }
     public List<EffectRune> Effects { get; set; }
-    public float[] ManaForSizingRunes { get; set; } // 4 позициb максимум; Проценты десятичной дробью, сумма - 1; сколько на каждую руну (из всех пяти) маны? 
+    public float[] ManaForSizingRunes { get; set; } // 4 позициb максимум; Проценты десятичной дробью, сумма - 1; сколько на каждую руну (из всех пяти) маны? Надо сделать поведение на случай, если руна не маштабируемая.
 
     public Spell(TargetRune targetType, List<EffectRune> effects, GameObject owner)
     {
@@ -44,12 +44,28 @@ public class Spell
         {
             givenMana -= TargetType.ManaCost;
 
+            //for (int i = 0; i < Effects.Count; i++)
+            //{
+
+            //}
+
             if (TargetType.GetType() == typeof(rune_SelfTarget))
             {
                 Targets.Add(Owner.GetComponent<CombatStats>());
-                Debug.Log(Targets[0]);
+                CheckIsOwnerIsTarget();
                 EffectOfSpell(givenMana);
-                return;
+            }
+            else if (TargetType.GetType() == typeof(rune_CircleAreaTarget))
+            {
+                // Не обращай внимания на название, пусть будет шар
+                CheckIsOwnerIsTarget();
+                EffectOfSpell(givenMana);
+            }
+            else if (TargetType.GetType() == typeof(rune_SquareAreaTarget))
+            {
+                // Не обращай внимания на название, пусть будет куб
+                CheckIsOwnerIsTarget();
+                EffectOfSpell(givenMana);
             }
         }
     }
@@ -59,6 +75,14 @@ public class Spell
         for (int i = 0; i < Effects.Count; i++)
         {
             Effects[i].ActivateRune((int)(givenMana * ManaForSizingRunes[i]), Targets);
+        }
+    }
+
+    public void CheckIsOwnerIsTarget()
+    {
+        for (int i = 0; i < Targets.Count; i++)
+        {
+            Targets[i] = Targets[i].gameObject == Owner ? null : Targets[i];
         }
     }
 }
