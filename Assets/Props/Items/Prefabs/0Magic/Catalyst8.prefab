@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 8151969592506029295, guid: ac911dff3c449f54bbd04beffadcf9c1,
         type: 3}
       propertyPath: m_Name
-      value: PP_Theme_08_Wand_001 Variant
+      value: Catalyst8
       objectReference: {fileID: 0}
     - target: {fileID: 8820948083306909269, guid: ac911dff3c449f54bbd04beffadcf9c1,
         type: 3}
@@ -95,12 +95,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    Name: 
+    Name: "\u041F\u043E\u0441\u043E\u0445 \u0441\u043E\u043B\u043D\u0446\u0430"
     Description: 
     Type: 0
-    Rarity: 
+    Rarity: Rare
     UpgradeLevel: 0
-    DamageToEnemies: 0
+    DamageToEnemies: 55
     DamageToModels: 0
 --- !u!114 &4186656688202973216
 MonoBehaviour:
@@ -116,6 +116,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     Type: 0
-    Rarity: 
+    CD: 8
     VaultOfMana: 0
     VaultOfManaMaxSize: 0

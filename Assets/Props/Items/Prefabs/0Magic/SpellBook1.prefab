@@ -126,6 +126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     Type: 1
-    Rarity: Common
+    CD: 15
     VaultOfMana: 0
     VaultOfManaMaxSize: 0

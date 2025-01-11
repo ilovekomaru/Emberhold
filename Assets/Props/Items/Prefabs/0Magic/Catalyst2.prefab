@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 5795407589716557517, guid: 9214597ca565f5840be2b48f71eb9966,
         type: 3}
       propertyPath: m_Name
-      value: PP_Theme_05_Chakram_001 Variant
+      value: Catalyst2
       objectReference: {fileID: 0}
     - target: {fileID: 6568144724263707767, guid: 9214597ca565f5840be2b48f71eb9966,
         type: 3}
@@ -95,12 +95,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    Name: 
-    Description: 
+    Name: "\u0420\u0438\u0442\u0443\u0430\u043B\u044C\u043D\u044B\u0439 \u043D\u043E\u0436"
+    Description: "\"\u0413\u043B\u0430\u0432\u043D\u043E\u0435 \u0432 \u0440\u0430\u0431\u043E\u0442\u0435
+      \u0436\u0440\u0435\u0446\u0430-\u043E\u0445\u043E\u0442\u043D\u0438\u043A\u0430
+      - \u0441\u0430\u043C\u043E\u043C\u0443 \u043D\u0435 \u0441\u0442\u0430\u0442\u044C
+      \u0436\u0435\u0440\u0442\u0432\u043E\u0439.\""
     Type: 0
-    Rarity: 
+    Rarity: Common
     UpgradeLevel: 0
-    DamageToEnemies: 0
+    DamageToEnemies: 12
     DamageToModels: 0
 --- !u!114 &7959394792412551408
 MonoBehaviour:
@@ -116,6 +119,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     Type: 0
-    Rarity: 
+    CD: 15
     VaultOfMana: 0
     VaultOfManaMaxSize: 0

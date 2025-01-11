@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 4761580129063501969, guid: cff5dffe00fae3646b02cf6f01cb6514,
         type: 3}
       propertyPath: m_Name
-      value: Scepter3 Variant
+      value: Catalyst3
       objectReference: {fileID: 0}
     - target: {fileID: 5287040466533210667, guid: cff5dffe00fae3646b02cf6f01cb6514,
         type: 3}
@@ -95,12 +95,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    Name: 
+    Name: "\u041F\u043E\u0441\u043E\u0445 \u043C\u0430\u0433\u0430"
     Description: 
     Type: 0
-    Rarity: 
+    Rarity: Uncommon
     UpgradeLevel: 0
-    DamageToEnemies: 0
+    DamageToEnemies: 18
     DamageToModels: 0
 --- !u!114 &9003006516384219699
 MonoBehaviour:
@@ -116,6 +116,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     Type: 0
-    Rarity: 
+    CD: 12
     VaultOfMana: 0
     VaultOfManaMaxSize: 0

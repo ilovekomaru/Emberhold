@@ -76,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 9161131422644436167, guid: 813bb717dc40c714c945c43743b0c58b,
         type: 3}
       propertyPath: m_Name
-      value: Bottle_01 Variant
+      value: Catalyst1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -110,9 +110,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    Name: Flask
-    Description: '"Let''s drink for this spell creation!"'
+    Name: "\u0421\u0442\u0435\u043A\u043B\u044F\u043D\u043D\u0430\u044F \u0444\u043B\u044F\u0433\u0430
+      (\u043D\u0435 \u0434\u043B\u044F \u0432\u043E\u0434\u044B)"
+    Description: 
     Type: 0
+    Rarity: Common
     UpgradeLevel: 0
     DamageToEnemies: 10
     DamageToModels: 0
@@ -130,6 +132,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     Type: 0
-    Rarity: 
+    CD: 15
     VaultOfMana: 0
     VaultOfManaMaxSize: 0

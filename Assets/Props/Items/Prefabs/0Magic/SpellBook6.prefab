@@ -17,7 +17,12 @@ PrefabInstance:
     - target: {fileID: 3033507789682960814, guid: aecac82e77fe1e54a87bf5c1c0794099,
         type: 3}
       propertyPath: stats.Rarity
-      value: Rare
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3033507789682960814, guid: aecac82e77fe1e54a87bf5c1c0794099,
+        type: 3}
+      propertyPath: stats.DamageToEnemies
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3437497352045181483, guid: aecac82e77fe1e54a87bf5c1c0794099,
         type: 3}
@@ -81,8 +86,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7727046201468904573, guid: aecac82e77fe1e54a87bf5c1c0794099,
         type: 3}
+      propertyPath: stats.CD
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727046201468904573, guid: aecac82e77fe1e54a87bf5c1c0794099,
+        type: 3}
       propertyPath: stats.Rarity
       value: Rare
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727046201468904573, guid: aecac82e77fe1e54a87bf5c1c0794099,
+        type: 3}
+      propertyPath: stats.VaultOfMana
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727046201468904573, guid: aecac82e77fe1e54a87bf5c1c0794099,
+        type: 3}
+      propertyPath: stats.VaultOfManaMaxSize
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

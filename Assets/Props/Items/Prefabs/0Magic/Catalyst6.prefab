@@ -100,12 +100,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    Name: 
+    Name: "\u0421\u0432\u0438\u0434\u0435\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u043E
+      \u0432\u0435\u043B\u0438\u0447\u0438\u044F"
     Description: 
     Type: 0
-    Rarity: 
+    Rarity: Rare
     UpgradeLevel: 0
-    DamageToEnemies: 0
+    DamageToEnemies: 40
     DamageToModels: 0
 --- !u!114 &9003006516384219699
 MonoBehaviour:
@@ -121,6 +122,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     Type: 0
-    Rarity: 
+    CD: 10
     VaultOfMana: 0
     VaultOfManaMaxSize: 0

@@ -11,13 +11,18 @@ PrefabInstance:
     - target: {fileID: 3033507789682960814, guid: aecac82e77fe1e54a87bf5c1c0794099,
         type: 3}
       propertyPath: stats.Name
-      value: "\u0413\u0440\u0438\u043C\u0443\u0430\u0440 \u0421\u0435\u0440\u0435\u0431\u0440\u044F\u043D\u043D\u044B\u0445
-        \u041A\u0440\u044B\u043B\u044C\u0435\u0432"
+      value: "\u0414\u043D\u0435\u0432\u043D\u0438\u043A \u0438\u043C\u0435\u043D\u0438\u0442\u043E\u0433\u043E
+        \u043F\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0435\u043D\u043D\u0438\u043A\u0430"
       objectReference: {fileID: 0}
     - target: {fileID: 3033507789682960814, guid: aecac82e77fe1e54a87bf5c1c0794099,
         type: 3}
       propertyPath: stats.Rarity
-      value: Rare
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3033507789682960814, guid: aecac82e77fe1e54a87bf5c1c0794099,
+        type: 3}
+      propertyPath: stats.DamageToEnemies
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3437497352045181483, guid: aecac82e77fe1e54a87bf5c1c0794099,
         type: 3}
@@ -27,7 +32,7 @@ PrefabInstance:
     - target: {fileID: 3797816315613289470, guid: aecac82e77fe1e54a87bf5c1c0794099,
         type: 3}
       propertyPath: m_Name
-      value: SpellBook6 1
+      value: SpellBook5
       objectReference: {fileID: 0}
     - target: {fileID: 4611507337669132612, guid: aecac82e77fe1e54a87bf5c1c0794099,
         type: 3}
@@ -78,6 +83,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7727046201468904573, guid: aecac82e77fe1e54a87bf5c1c0794099,
+        type: 3}
+      propertyPath: stats.CD
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7727046201468904573, guid: aecac82e77fe1e54a87bf5c1c0794099,
         type: 3}

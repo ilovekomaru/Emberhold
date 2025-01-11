@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 100018019714611367, guid: 3441d49fa3ca7744a95e9dfd2aba3f54,
         type: 3}
       propertyPath: m_Name
-      value: PP_Theme_09_Horn_003 Variant
+      value: Catalyst7
       objectReference: {fileID: 0}
     - target: {fileID: 731981687516979741, guid: 3441d49fa3ca7744a95e9dfd2aba3f54,
         type: 3}
@@ -95,12 +95,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    Name: 
+    Name: "\u0420\u043E\u0433 \u0438\u0437\u043E\u0431\u0438\u043B\u0438\u044F"
     Description: 
     Type: 0
-    Rarity: 
+    Rarity: Rare
     UpgradeLevel: 0
-    DamageToEnemies: 0
+    DamageToEnemies: 50
     DamageToModels: 0
 --- !u!114 &930553815832620378
 MonoBehaviour:
@@ -116,6 +116,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     Type: 0
-    Rarity: 
+    CD: 8
     VaultOfMana: 0
     VaultOfManaMaxSize: 0
