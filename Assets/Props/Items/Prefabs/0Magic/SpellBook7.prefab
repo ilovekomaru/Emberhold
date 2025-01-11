@@ -16,7 +16,7 @@ PrefabInstance:
     - target: {fileID: 8512130858803666336, guid: 0c90db8fea3862442b559c97aca37ba7,
         type: 3}
       propertyPath: m_Name
-      value: SpellBook2
+      value: SpellBook7
       objectReference: {fileID: 0}
     - target: {fileID: 8512130858803666336, guid: 0c90db8fea3862442b559c97aca37ba7,
         type: 3}
@@ -107,10 +107,10 @@ MonoBehaviour:
   stats:
     Name: "\u0417\u0430\u043F\u0438\u0441\u0438 \u0443\u0447\u0435\u043D\u0438\u043A\u0430"
     Description: 
-    Type: 0
-    Rarity: Common
+    Type: 1
+    Rarity: Mythic
     UpgradeLevel: 0
-    DamageToEnemies: 10
+    DamageToEnemies: 50
     DamageToModels: 0
 --- !u!114 &7727046201468904573
 MonoBehaviour:
@@ -126,6 +126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     Type: 1
-    Rarity: Common
-    VaultOfMana: 0
-    VaultOfManaMaxSize: 0
+    CD: 8
+    VaultOfMana: 100
+    VaultOfManaMaxSize: 100
