@@ -91,10 +91,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    Name: 
+    Name: "\u0411\u043E\u0436\u0435\u0441\u0442\u0432\u0435\u043D\u043D\u043E\u0435
+      \u043A\u043E\u043F\u044C\u0451"
     Description: 
     Type: 0
     Rarity: Mythic
     UpgradeLevel: 0
-    DamageToEnemies: 0
+    DamageToEnemies: 80
     DamageToModels: 0

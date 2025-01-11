@@ -91,10 +91,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    Name: 
+    Name: "\u041F\u0438\u043A\u0430 \u0442\u043E\u0447\u0451\u043D\u0430\u044F"
     Description: 
     Type: 1
     Rarity: Uncommon
     UpgradeLevel: 0
-    DamageToEnemies: 0
+    DamageToEnemies: 20
     DamageToModels: 0
