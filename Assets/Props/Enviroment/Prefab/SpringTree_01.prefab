@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2733119029220407321}
   - component: {fileID: 146659523138555091}
   - component: {fileID: -3335823299880832586}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpringTree_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6789698604872080942}
   - component: {fileID: 7608270257497739659}
   - component: {fileID: 5652851188979361089}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WinterTree_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}

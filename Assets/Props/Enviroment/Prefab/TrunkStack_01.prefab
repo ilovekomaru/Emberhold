@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9049960591140748536}
   - component: {fileID: 5348078022265500509}
   - component: {fileID: 7916422052144580503}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TrunkStack_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

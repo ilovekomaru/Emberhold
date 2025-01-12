@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MedievalWeapon
-    second: {fileID: 2100000, guid: 714fb05c38fafe044b8f47faf6a24154, type: 2}
+    second: {fileID: 2100000, guid: 888da2d8412a9af43a827826303521c8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

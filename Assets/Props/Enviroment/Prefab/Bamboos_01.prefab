@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8497557907343687124}
   - component: {fileID: 4774581347409146481}
   - component: {fileID: 7324628952907499195}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bamboos_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

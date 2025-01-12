@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7670178711110718085}
   - component: {fileID: 5590380765211027023}
   - component: {fileID: -1386959914666374428}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AutumnTree_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}

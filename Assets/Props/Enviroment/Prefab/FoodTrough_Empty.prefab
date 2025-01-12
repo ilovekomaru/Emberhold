@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 828007858579413813}
   - component: {fileID: 4382696606954460304}
   - component: {fileID: 1960895554200559706}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FoodTrough_Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}

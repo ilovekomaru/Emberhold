@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4811043453486492503}
   - component: {fileID: 8461024630386779378}
   - component: {fileID: 5949094970976112696}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bamboo_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

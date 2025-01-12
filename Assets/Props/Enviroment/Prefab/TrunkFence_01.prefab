@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2598542558390969722}
   - component: {fileID: 1414195313776782047}
   - component: {fileID: 3766359955884416533}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TrunkFence_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2928336840982241607}
   - component: {fileID: 2237252462083878626}
   - component: {fileID: 4100710027590916648}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BrickWall_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

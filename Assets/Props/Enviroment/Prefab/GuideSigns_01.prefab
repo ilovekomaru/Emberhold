@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4896964436534303933}
   - component: {fileID: 8384111104604115736}
   - component: {fileID: 6034453966409361362}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GuideSigns_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

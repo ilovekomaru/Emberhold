@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4327218586307483120}
   - component: {fileID: 838379771856181845}
   - component: {fileID: 3190363537856573087}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LotusLeaf_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

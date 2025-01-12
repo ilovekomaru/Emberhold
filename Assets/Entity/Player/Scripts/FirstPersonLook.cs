@@ -24,13 +24,6 @@ public class FirstPersonLook : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.white;
-        Gizmos.DrawLine(transform.position, PlayerLookingAt());
-        Gizmos.DrawCube(PlayerLookingAt(), Vector3.one * 0.1f);
-    }
-
     void Update()
     {
         // Get smooth velocity.
@@ -44,14 +37,6 @@ public class FirstPersonLook : MonoBehaviour
         transform.localRotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
         character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
         //personMovement.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
-    }
-
-    public Vector3 PlayerLookingAt()
-    {
-        Vector3 rayStart = transform.position;
-        if (!Physics.Raycast(rayStart, transform.forward, out RaycastHit hit, Mathf.Infinity))
-            return rayStart + transform.forward * 100;
-        return hit.point;
     }
 
     public Vector3 PlayerLookDirection()

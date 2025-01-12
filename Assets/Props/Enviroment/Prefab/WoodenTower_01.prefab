@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3321562665811358708}
   - component: {fileID: 1853042337575189585}
   - component: {fileID: 4491112996843374747}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WoodenTower_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

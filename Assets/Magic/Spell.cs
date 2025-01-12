@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
+using UnityEngine.Diagnostics;
 
 public class Spell
 {
@@ -20,6 +21,14 @@ public class Spell
     public TargetRune TargetType { get; set; }
     public List<EffectRune> Effects { get; set; }
     public float[] ManaForSizingRunes { get; set; } // 4 позициb максимум; Проценты десятичной дробью, сумма - 1; сколько на каждую руну (из всех пяти) маны? Надо сделать поведение на случай, если руна не маштабируемая.
+
+    public GameObject playerCamera;
+    private Aims aims;
+
+    void Awake()
+    {
+        aims = playerCamera.GetComponent<Aims>();
+    }
 
     public Spell(TargetRune targetType, List<EffectRune> effects, GameObject owner)
     {
