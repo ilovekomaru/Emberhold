@@ -27,7 +27,7 @@ public class FallingDamage : MonoBehaviour
         if (isCalculatingFallingDamage && isGrounded)
         {
             isCalculatingFallingDamage = false;
-            GetComponentInParent<CombatStats>().DealDamageToThis((int)(timer * fallingDamageDependingOnTimeMultipliyer), "Falling");
+            //GetComponentInParent<CombatStats>().DealDamageToThis((int)(timer * fallingDamageDependingOnTimeMultipliyer), "Falling");
             timer = 0;
         }
     }

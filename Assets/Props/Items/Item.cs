@@ -7,17 +7,19 @@ public class Item : MonoBehaviour
 {
     public ItemStats stats;
 
-    public void Upgrade()
+    public void UpgradeWeapon()
     {
-        stats = new ItemStats
-        {
-            Name = stats.Name,
-            Description = stats.Description,
-            Type = stats.Type,
-            UpgradeLevel = stats.UpgradeLevel + 1,
-            DamageToEnemies = stats.DamageToEnemies * stats.UpgradeLevel,
-            DamageToModels = stats.DamageToModels * stats.UpgradeLevel
-        };
+        stats.Damage += stats.DamageUpgrade;
+    }
+
+    public void UpgradeAxe()
+    {
+        stats.AxeDamage += stats.AxeDamageUpgrade;
+    }
+
+    public void UpgradePickaxe()
+    {
+        stats.Damage += stats.PickaxeDamageUpgrade;
     }
 }
 
@@ -27,9 +29,12 @@ public struct ItemStats
 {
     public string Name;
     public string Description;
-    public int Type; // 0: Magic Weapon, 1: Weapon, 2: Pickaxe, 3: Axe
-    public string Rarity;
-    public int UpgradeLevel;
-    public int DamageToEnemies;
-    public int DamageToModels;
+    public int Type;    // 0: Magic Weapon, 1: Magic Tome, 2: Pickaxe, 3: Axe
+    public int Level;
+    public float Damage;
+    public float DamageUpgrade;
+    public int AxeDamage;
+    public int AxeDamageUpgrade;
+    public int PickaxeDamage;
+    public int PickaxeDamageUpgrade;
 }

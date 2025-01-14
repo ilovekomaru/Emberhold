@@ -13,9 +13,7 @@ public class MagicWeapon : MonoBehaviour
 [Serializable]
 public struct MagicWeaponStats
 {
-    public int Type; // 0: Scepters and other, 1: Spell book, 2: Mana Vault
-    public float CD;
-    public List<Spell> ListOfSpells;
-    public int VaultOfMana;
-    public int VaultOfManaMaxSize;
+    public List<Spell> ListOfSpells; // nado kak-to pomeniat, poka ne pridumal
+    public int Manapool;
+    public int ManapoolUpgrade;
 }
