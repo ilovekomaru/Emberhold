@@ -7,9 +7,9 @@ public class Item : MonoBehaviour
 {
     public ItemStats stats;
 
-    public void UpgradeWeapon()
+    public void UpgradeMagicWeapon()
     {
-        stats.Damage += stats.DamageUpgrade;
+        stats.DamageMultiplyer += stats.DamageMultiplyerUpgrade;
     }
 
     public void UpgradeAxe()
@@ -19,7 +19,7 @@ public class Item : MonoBehaviour
 
     public void UpgradePickaxe()
     {
-        stats.Damage += stats.PickaxeDamageUpgrade;
+        stats.PickaxeDamage += stats.PickaxeDamageUpgrade;
     }
 }
 
@@ -31,8 +31,8 @@ public struct ItemStats
     public string Description;
     public int Type;    // 0: Magic Weapon, 1: Magic Tome, 2: Pickaxe, 3: Axe
     public int Level;
-    public float Damage;
-    public float DamageUpgrade;
+    public float DamageMultiplyer;
+    public float DamageMultiplyerUpgrade;
     public int AxeDamage;
     public int AxeDamageUpgrade;
     public int PickaxeDamage;

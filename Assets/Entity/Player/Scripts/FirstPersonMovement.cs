@@ -71,8 +71,6 @@ public class FirstPersonMovement : MonoBehaviour
             y += localRotation;
         }
 
-        Debug.Log(y);
-        Debug.Log(localRotation);
         playerModel.transform.rotation = Quaternion.AngleAxis(y, Vector3.up);
 
         // Apply movement.

@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
+    ListOfSpells: []
     Manapool: 0
     ManapoolUpgrade: 0
 --- !u!114 &7275298441331998933
@@ -141,4 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39cec1ce756fc0e43b1049ff5315fad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Instance: {fileID: 0}
+  spell:
+  - Name: LazerBeam
+    Description: 
+    isUnlocked: 1
+    prefab: {fileID: 261935166719334620, guid: edf213d9f8984164994800f4ca72786a, type: 3}
