@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &288060059194470221
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4761580129063501969, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      propertyPath: m_Name
+      value: 0MagicWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287040466533210667, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287040466533210667, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287040466533210667, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287040466533210667, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287040466533210667, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287040466533210667, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287040466533210667, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287040466533210667, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287040466533210667, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287040466533210667, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6418891255044645188, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8f3b135f36d1de64a83a1e4431bbceaa, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4761580129063501969, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6997678613757203249}
+    - targetCorrespondingSourceObject: {fileID: 4761580129063501969, guid: cff5dffe00fae3646b02cf6f01cb6514,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9003006516384219699}
+  m_SourcePrefab: {fileID: 100100000, guid: cff5dffe00fae3646b02cf6f01cb6514, type: 3}
+--- !u!1 &4750139815698116572 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4761580129063501969, guid: cff5dffe00fae3646b02cf6f01cb6514,
+    type: 3}
+  m_PrefabInstance: {fileID: 288060059194470221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6997678613757203249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4750139815698116572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fab73dc49d20534e8ce0ae60a1debca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    Name: Catalyst
+    Description: Deals Magic Damage
+    Type: 0
+    Level: 1
+    DamageMultiplyer: 0
+    DamageMultiplyerUpgrade: 0
+    AxeDamage: 0
+    AxeDamageUpgrade: 0
+    PickaxeDamage: 0
+    PickaxeDamageUpgrade: 0
+--- !u!114 &9003006516384219699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4750139815698116572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ccadaf047903049bd096429ef25ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    manapool: 0
+    manapoolUpgrade: 0
+    magicDamageMultiplier: 0
+    magicDamageMultiplierUpgrade: 0
+  spells: []
+  currentSpellID: 0
+  spellSwitchCooldown: 2
+  allowInvoke: 1
+  tpsCam: {fileID: 0}
+  attackPoint: {fileID: 0}
+  muzzleFlash: {fileID: 0}
+  manaDisplay: {fileID: 0}

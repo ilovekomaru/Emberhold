@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1640637399428066644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7496496666641343175}
+  - component: {fileID: 4089620563158880701}
+  m_Layer: 0
+  m_Name: PropsGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7496496666641343175
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640637399428066644}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1000, y: 0, z: -1000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4089620563158880701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640637399428066644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 608e47dfc06002742a08d6c0f6ec5f25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 1804244151549930758, guid: a9e8ec9d2ae5a9e46a3c2f168aef0d21, type: 3}
+  - {fileID: 5649586910099700326, guid: 1628b9bb55d40c74c80ba77cf05120bf, type: 3}
+  - {fileID: 4494341512636877629, guid: 827871e6a6970974dad0a86979f2afc2, type: 3}
+  - {fileID: 1892688962060378242, guid: c55fbaf5faa363c428c8ae328f1d631e, type: 3}
+  - {fileID: 3299460309311030865, guid: ba6a3796f5464cf468d3459b2b74b1b6, type: 3}
+  - {fileID: 8309130964281113202, guid: 2c393df2745c4b4459c4586dbc1d1f4b, type: 3}
+  - {fileID: 7423594646761524157, guid: 9adf7af000156bc439918111686ccf21, type: 3}
+  - {fileID: 3201947013611667770, guid: 0e403b6a531ac064c9558d91a1be12e8, type: 3}
+  - {fileID: 5947183439004682991, guid: 150882436c9041546938c2d44ac9acd3, type: 3}
+  - {fileID: 7616507679668777215, guid: 9ac9959a28da31a48a148f91f718ddf1, type: 3}
+  - {fileID: 6848822895047334092, guid: 45666775a8e15c94dbddf6b9588f0555, type: 3}
+  - {fileID: 6239167598777059226, guid: 04597ce0aacfb9346b1811ef6fb2ea0b, type: 3}
+  - {fileID: 3525140769691756442, guid: 1263cc9ebce581f4c97c4dca761ef2f7, type: 3}
+  - {fileID: 1659112671534042623, guid: d63433b56be67a94b8997bc2989395f5, type: 3}
+  - {fileID: 5827532467702579659, guid: 7999f5a0fb0111c4b823d144a5e9b867, type: 3}
+  - {fileID: 6950468331125011801, guid: a4865b001daa7cc4595d3e723d51c066, type: 3}
+  - {fileID: 6087094800287832171, guid: 7f368ba45b644e74cb86a0a7b75270c4, type: 3}
+  - {fileID: 6156994931936052372, guid: 764031d5685bffa4da74aaa25a3adfd7, type: 3}
+  - {fileID: 3043748710873050876, guid: 9c2bbca0fbb37e343b1a6a248e6b6c48, type: 3}
+  raySett:
+    density: 800
+    seed: 0
+    minHeight: 25
+    maxHeight: 500
+    xRange: {x: -1000, y: 1000}
+    xRangeException: {x: -80, y: 80}
+    zRange: {x: -1000, y: 1000}
+    zRangeException: {x: -80, y: 80}
+  prefabVar:
+    rotateTowardsNormal: 0
+    rotationRange: {x: 0, y: 0}
+    minScale: {x: 2, y: 2, z: 2}
+    maxScale: {x: 6, y: 6, z: 6}
