@@ -14,8 +14,9 @@ public class rune_Healing : EffectRune
         IsSizing = false;
     }
 
-    public override void Effect(CombatStats target)
+    public override void Effect(CombatStats target, CombatStats spellOwner)
     {
-        target.RestoreHP(15);
+        //target.RestoreHP(15);
+        target.HP += 15;
     }
 }

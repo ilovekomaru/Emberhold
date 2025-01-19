@@ -32,7 +32,6 @@ public class GUIUpdater : MonoBehaviour
         attack.text = playerCombatStats.attack.ToString();
         physical_resist.text = playerCombatStats.physicalResist.ToString();
         magical_resist.text = playerCombatStats.magicalResist.ToString();
-        buffs.text = playerCombatStats.buffs.ToString();
     }
 
     void Update()
@@ -51,6 +50,5 @@ public class GUIUpdater : MonoBehaviour
         attack.text = playerCombatStats.attack.ToString();
         physical_resist.text = playerCombatStats.physicalResist.ToString();
         magical_resist.text = playerCombatStats.magicalResist.ToString();
-        buffs.text = playerCombatStats.buffs.ToString();
     }
 }

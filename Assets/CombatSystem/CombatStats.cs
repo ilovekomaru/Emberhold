@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class CombatStats : MonoBehaviour
@@ -12,6 +13,7 @@ public class CombatStats : MonoBehaviour
 
     public int attack;
     public Item Weapon;
+    public MagicWeapon MagicWeapon;
 
     public float MP;
     public float maxMP;
@@ -19,11 +21,15 @@ public class CombatStats : MonoBehaviour
 
     public float physicalResist;
     public float magicalResist;
-    public float buffs;
+    public float physicalBuffs;
+
+    public List<Status> statuses;
+    public List<float> timersOfStatusesLifes;
 
     public bool manualRecoveryPerSecond = false;
     float hpRestoreTimer;
     float mpRestoreTimer;
+    float statusTimer;
 
     public void Start()
     {
@@ -36,6 +42,27 @@ public class CombatStats : MonoBehaviour
 
     public void Update()
     {
+        for (int i = 0; i < timersOfStatusesLifes.Count; i++)
+        {
+            timersOfStatusesLifes[i] -= Time.deltaTime;
+            if (timersOfStatusesLifes[i] <= 0)
+            {
+                timersOfStatusesLifes.RemoveAt(i);
+                statuses.RemoveAt(i);
+            }
+        }
+
+        statusTimer += Time.deltaTime;
+        if (statusTimer >= 1)
+        {
+            statusTimer = 0;
+
+            for (int i = 0; i < statuses.Count; i++)
+            {
+                statuses[i].Effect(this);
+            }
+        }
+
         if (HP <= maxHP)
         {
             hpRestoreTimer += Time.deltaTime;
@@ -110,9 +137,20 @@ public class CombatStats : MonoBehaviour
         }
     }
 
-    public int CalculateDamageForOther()
+    public int CalculateDamageForOther(string damageType)
     {
-        return (attack + Weapon.GetComponent<Item>().stats.DamageToEnemies) * (int)(1 + buffs);
+        var damage = 0;
+
+        if (damageType == "Physical")
+        {
+            damage = (attack + Weapon.GetComponent<Item>().stats.DamageToEnemies)*(int)(1 - physicalResist);
+        }
+        else if (damageType == "Magical")
+        {
+            damage = (attack + MagicWeapon.GetComponent<Item>().stats.DamageToEnemies) * (int)(1 - magicalResist);
+        }
+
+        return damage;
     }
 
     public void RestoreHP(int healValue)

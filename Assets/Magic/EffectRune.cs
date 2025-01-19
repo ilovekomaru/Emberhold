@@ -11,7 +11,7 @@ public abstract class EffectRune : Rune
 
     }
 
-    public void ActivateRune(int givenMana, List<CombatStats> targets)
+    public void ActivateRune(int givenMana, List<CombatStats> targets, CombatStats spellOwner)
     {
         if (givenMana >= ManaCost)
         {
@@ -19,18 +19,18 @@ public abstract class EffectRune : Rune
             {
                 foreach (CombatStats target in targets)
                 {
-                    EffectWithSizing(target, givenMana);
+                    EffectWithSizing(target, givenMana, spellOwner);
                 }
             }
             else
             {
                 foreach (CombatStats target in targets)
                 {
-                    Effect(target);
+                    Effect(target, spellOwner);
                 }
             }
         }
     }
-    public virtual void Effect(CombatStats target) { }
-    public virtual void EffectWithSizing(CombatStats target, int givenMana) { }
+    public virtual void Effect(CombatStats target, CombatStats spellOwner) { }
+    public virtual void EffectWithSizing(CombatStats target, int givenMana, CombatStats spellOwner) { }
 }

@@ -16,6 +16,7 @@ public class Spell
 
     public GameObject Owner { get; set; }
     public List<CombatStats> Targets { get; set; }
+    public Vector3 PointTarget { get; set; }
 
     public TargetRune TargetType { get; set; }
     public List<EffectRune> Effects { get; set; }
@@ -52,7 +53,6 @@ public class Spell
             if (TargetType.GetType() == typeof(rune_SelfTarget))
             {
                 Targets.Add(Owner.GetComponent<CombatStats>());
-                CheckIsOwnerIsTarget();
                 EffectOfSpell(givenMana);
             }
             else if (TargetType.GetType() == typeof(rune_CircleAreaTarget))
@@ -74,7 +74,7 @@ public class Spell
     {
         for (int i = 0; i < Effects.Count; i++)
         {
-            Effects[i].ActivateRune((int)(givenMana * ManaForSizingRunes[i]), Targets);
+            Effects[i].ActivateRune((int)(givenMana * ManaForSizingRunes[i]), Targets, Owner.GetComponent<CombatStats>());
         }
     }
 

@@ -15,11 +15,11 @@ public class rune_Damage : EffectRune
         IsSizing = true;
     }
 
-    public override void Effect(CombatStats target)
+    public override void Effect(CombatStats target, CombatStats spellOwner)
     {
         target.DealDamageToThis(20, "Magical");
     }
-    public override void EffectWithSizing(CombatStats target, int givenMana)
+    public override void EffectWithSizing(CombatStats target, int givenMana, CombatStats spellOwner)
     {
         target.DealDamageToThis(givenMana * 2, "Magical");
     }

@@ -15,11 +15,11 @@ public class rune_Shield : EffectRune
         IsSizing = true;
     }
 
-    public override void Effect(CombatStats target)
+    public override void Effect(CombatStats target, CombatStats spellOwner)
     {
         target.shield = 25; 
     }
-    public override void EffectWithSizing(CombatStats target, int givenMana)
+    public override void EffectWithSizing(CombatStats target, int givenMana, CombatStats spellOwner)
     {
         target.shield = 5*givenMana;
     }
