@@ -80,10 +80,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9003006516384219699}
-    - targetCorrespondingSourceObject: {fileID: 4761580129063501969, guid: cff5dffe00fae3646b02cf6f01cb6514,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7275298441331998933}
   m_SourcePrefab: {fileID: 100100000, guid: cff5dffe00fae3646b02cf6f01cb6514, type: 3}
 --- !u!1 &4750139815698116572 stripped
 GameObject:
@@ -108,8 +104,8 @@ MonoBehaviour:
     Description: Deals Magic Damage
     Type: 0
     Level: 1
-    Damage: 20
-    DamageUpgrade: 10
+    DamageMultiplyer: 0
+    DamageMultiplyerUpgrade: 0
     AxeDamage: 0
     AxeDamageUpgrade: 0
     PickaxeDamage: 0
@@ -127,23 +123,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    ListOfSpells: []
-    Manapool: 0
-    ManapoolUpgrade: 0
---- !u!114 &7275298441331998933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4750139815698116572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39cec1ce756fc0e43b1049ff5315fad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spell:
-  - Name: LazerBeam
-    Description: 
-    isUnlocked: 1
-    prefab: {fileID: 261935166719334620, guid: edf213d9f8984164994800f4ca72786a, type: 3}
+    manapool: 0
+    manapoolUpgrade: 0
+    magicDamageMultiplier: 0
+    magicDamageMultiplierUpgrade: 0
+  spells: []
+  currentSpellID: 0
+  spellSwitchCooldown: 2
+  allowInvoke: 1
+  tpsCam: {fileID: 0}
+  attackPoint: {fileID: 0}
+  muzzleFlash: {fileID: 0}
+  manaDisplay: {fileID: 0}

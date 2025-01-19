@@ -14,7 +14,7 @@ public class MagicWeapon : MonoBehaviour
 
     Spell currentSpell;
 
-    int mana;
+    public int mana;
 
     public bool allowInvoke = true;
     bool shooting, readyToShoot;
@@ -23,7 +23,6 @@ public class MagicWeapon : MonoBehaviour
     public Camera tpsCam;
     public Transform attackPoint;
     public GameObject muzzleFlash;
-    public TextMeshProUGUI manaDisplay;
 
     public void Awake()
     {
@@ -33,7 +32,8 @@ public class MagicWeapon : MonoBehaviour
 
     public void WeaponUpgrade()
     {
-        stats.manapool += stats.manapoolUpgrade;
+        stats.manapool = (int)(stats.manapool * stats.manapoolUpgradeMultiplyer);
+        stats.physicDamageMultiplier += stats.physicDamageMultiplierUpgrade;
         stats.magicDamageMultiplier += stats.magicDamageMultiplierUpgrade;
     }
 
@@ -41,15 +41,10 @@ public class MagicWeapon : MonoBehaviour
     {
         CheckActiveSpell();
         AttackInput();
-        Debug.Log(readyToShoot);
-
-        if (manaDisplay != null)
-            manaDisplay.SetText($"{mana}\n{stats.manapool}");
     }
 
     private void CheckActiveSpell()
     {
-        Debug.Log("checking");
         currentSpell = spells[currentSpellID];
     }
 
@@ -66,10 +61,15 @@ public class MagicWeapon : MonoBehaviour
         if (readyToShoot && shooting && mana >= currentSpell.manaCost)
         {
             bulletsShot = 0;
-            Debug.Log("shooting");
             Shoot();
         }
-
+    }
+    private ProjectileDamage CalculateDamage()
+    {
+        ProjectileDamage damage = new ProjectileDamage();
+        damage.PhysDamage = 1 * stats.physicDamageMultiplier * spells[currentSpellID].PhysDamage;
+        damage.MagiDamage = 1 * stats.magicDamageMultiplier * spells[currentSpellID].MagiDamage;
+        return damage;
     }
 
     private void Shoot()
@@ -95,9 +95,11 @@ public class MagicWeapon : MonoBehaviour
         GameObject currentBullet = Instantiate(currentSpell.prefab, attackPoint.position, Quaternion.identity);
 
         currentBullet.transform.forward = directionWithSpread.normalized;
-
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized * currentSpell.shootForce, ForceMode.Impulse);
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized * currentSpell.upwardForce, ForceMode.Impulse);
+        
+        ProjectileDamageStats currentBulletStats = currentBullet.AddComponent<ProjectileDamageStats>();
+        currentBulletStats.SetDamage(CalculateDamage());
 
         if (muzzleFlash != null)
             Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
@@ -108,7 +110,6 @@ public class MagicWeapon : MonoBehaviour
         if (allowInvoke)
         {
             allowInvoke = false;
-            Debug.Log("invoke");
             Invoke("ResetShot", currentSpell.timeBetweenShooting);
         }
         
@@ -120,7 +121,6 @@ public class MagicWeapon : MonoBehaviour
 
     private void ResetShot()
     {
-        Debug.Log("resetshot");
         readyToShoot = true;
         allowInvoke = true;
     }
@@ -131,7 +131,10 @@ public class MagicWeapon : MonoBehaviour
 public struct MagicWeaponStats
 {
     public int manapool;
-    public int manapoolUpgrade;
+    public float manapoolUpgradeMultiplyer;
+
+    public float physicDamageMultiplier;
+    public float physicDamageMultiplierUpgrade;
     public float magicDamageMultiplier;
     public float magicDamageMultiplierUpgrade;
 }
@@ -152,7 +155,7 @@ public struct Spell
     public bool allowButtonHold;
 
     public int PhysDamage;
-    public int MagDamage;
+    public int MagiDamage;
 
     //is it accesible now (unlockable for player)
     public bool isUnlocked;
