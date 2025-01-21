@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1192208024711533605}
   - component: {fileID: 3994523167423848687}
   - component: {fileID: -1742577450779178918}
+  - component: {fileID: 3083545298127921029}
   m_Layer: 3
   m_Name: AutumnTree_01
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3201947013611667770}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -106,3 +107,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 603786779314949523, guid: e936eb6477cc8304fba804320b7cbd5e, type: 3}
+--- !u!114 &3083545298127921029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3201947013611667770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e1b39d193a43a4fb7ef4ca399d7f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    health: 10
+    minDamage: 2
+    isTree: 1
+    resourceCount: 5
+  prefab: {fileID: 6927510348289496683, guid: d34349da0c2c5174184c692503c3d049, type: 3}

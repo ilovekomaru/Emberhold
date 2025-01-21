@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 866562905327103018}
   m_Layer: 3
   m_Name: WinterTree_01
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

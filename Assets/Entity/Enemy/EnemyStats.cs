@@ -1,9 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
+    public float ModelHeight;
+    public float ModelWidth;
+
     public float health;
     public float physMissChance;
     public float magiMissChance;
@@ -11,17 +16,23 @@ public class EnemyStats : MonoBehaviour
     public float speed;
     public float damage;
 
+    public GameObject missPrefab;
+
     private ParticleSystem missParticle;
 
     private void Awake()
     {
-        
+        Invoke("MissPrefab", 1f);
     }
 
     private void Update()
     {
-        missParticle = this.GetComponent<ParticleSystem>();
         HealthCheck();
+    }
+
+    private void MissPrefab()
+    {
+        missParticle = Instantiate(missPrefab, this.transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
     }
 
     private void HealthCheck()
@@ -34,10 +45,8 @@ public class EnemyStats : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("collision");
         if (collision!= null && collision.gameObject.tag == "Projectile")
         {
-            Debug.Log("collision2");
             if(UnityEngine.Random.Range(0, 100) > physMissChance)
             {
                 health -= collision.gameObject.GetComponent<ProjectileDamage>().PhysDamage;
