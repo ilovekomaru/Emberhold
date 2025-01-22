@@ -133,7 +133,6 @@ public struct MagicWeaponStats
 {
     public int manapool;
     public float manapoolUpgradeMultiplyer;
-
     public float physicDamageMultiplier;
     public float physicDamageMultiplierUpgrade;
     public float magicDamageMultiplier;
