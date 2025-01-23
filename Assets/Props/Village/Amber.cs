@@ -19,7 +19,13 @@ public class Amber : MonoBehaviour
             timeBetweenCasts = 100,
             Effect = new(WallReconstruction),
         },
-        
+        new SupportSpell
+        {
+            Name = "Healing field",
+            Description = "Restores 50 HP every 15 seconds",
+            timeBetweenCasts = 15,
+            Effect = new(HealingField),
+        },
     };
 
     public List<SupportSpell> activeSupportSpells = new List<SupportSpell>();
@@ -31,6 +37,8 @@ public class Amber : MonoBehaviour
 
     public Barrier SanctuaryBarrier;
     public Barrier VillageBarrier;
+
+    public static PlayerStats playerStats;
 
     public bool isNight = false;
     public int nightNumber = 0;
@@ -50,6 +58,7 @@ public class Amber : MonoBehaviour
 
     //test
     activeSupportSpells.Add(supportSpells[0]);
+    activeSupportSpells.Add(supportSpells[1]);
     }
     private void Update()
     {
@@ -68,12 +77,20 @@ public class Amber : MonoBehaviour
                 activeSupportSpells[0].Effect();
             }
 
-            //timer2 += Time.deltaTime;
-            //if (timer2 > activeSupportSpells[1].timeBetweenCasts)
-            //{
-            //    timer2 = 0;
+            timer2 += Time.deltaTime;
+            if (timer2 > activeSupportSpells[1].timeBetweenCasts)
+            {
+                timer2 = 0;
 
-            //    activeSupportSpells[1].Effect();
+                activeSupportSpells[1].Effect();
+            }
+
+            //timer3 += Time.deltaTime;
+            //if (timer3 > activeSupportSpells[2].timeBetweenCasts)
+            //{
+            //    timer3 = 0;
+
+            //    activeSupportSpells[2].Effect();
             //}
         }
     }
@@ -82,7 +99,7 @@ public class Amber : MonoBehaviour
 
     public static void HealingField()
     {
-        
+        playerStats.Heal(50);
     }
 
     public static void BuffingField()
