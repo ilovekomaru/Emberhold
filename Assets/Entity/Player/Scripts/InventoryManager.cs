@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public InventoryManager Instance;
     public List<GameObject> weaponList;
     public int currentWeapon = 0;
 
@@ -21,11 +22,19 @@ public class InventoryManager : MonoBehaviour
     public List<Animator> animators;
     public List<GameObject> statBars;
     public List<TextMeshProUGUI> statText;
+    public List<TextMeshProUGUI> resText;
     public float statBarDefaultWidth = 192f;
     public float statBarSize;
 
+    public int wood, stone;
+
     void Start()
     {
+        Instance = this;
+        foreach (GameObject weapon in weaponList)
+        {
+            weapon.SetActive(false);
+        }
         animators[currentWeapon].SetBool("Selected", true);
         statText.Append(statBars[0].GetComponentInChildren<TextMeshProUGUI>());
         statText.Append(statBars[1].GetComponentInChildren<TextMeshProUGUI>());
@@ -35,6 +44,13 @@ public class InventoryManager : MonoBehaviour
     {
         MyInputs();
         GetAndDisplayStats();
+        DisplayResources();
+    }
+
+    public void AddResources(int _wood, int _stone)
+    {
+        wood += _wood;
+        stone += _stone;
     }
 
     private void MyInputs()
@@ -112,4 +128,9 @@ public class InventoryManager : MonoBehaviour
         statText[1].text = $"{mana} / {manapool}";
     }
 
+    private void DisplayResources()
+    {
+        resText[0].text = wood.ToString();
+        resText[1].text = stone.ToString();
+    }
 }

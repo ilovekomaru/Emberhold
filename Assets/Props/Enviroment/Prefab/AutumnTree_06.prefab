@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8931795198028444096}
   m_Layer: 3
   m_Name: AutumnTree_06
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
