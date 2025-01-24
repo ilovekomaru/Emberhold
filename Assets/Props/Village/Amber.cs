@@ -7,22 +7,30 @@ using UnityEngine.Events;
 
 // Amber is actually VillageManager
 
-public delegate void SupportSpellEffect();
+public delegate void SupportSpellEffectForVillage();
+public delegate void SupportSpellEffectForPlayer(PlayerStats player);
 public class Amber : MonoBehaviour
 {
-    public List<SupportSpell> supportSpells = new List<SupportSpell>()
+    public List<SupportSpellForVillage> supportSpellsForVillage = new List<SupportSpellForVillage>()
     {
-        new SupportSpell
+        new SupportSpellForVillage
         {
             Name = "Wall reconstruction",
             Description = "Use for it for 2 night times to restore walls",
             timeBetweenCasts = 100,
             Effect = new(WallReconstruction),
         },
-        
     };
-
-    public List<SupportSpell> activeSupportSpells = new List<SupportSpell>();
+    public List<SupportSpellForPlayer> supportSpellsForPlayer = new List<SupportSpellForPlayer>()
+    {
+        new SupportSpellForPlayer
+        {
+            Name = "Healing field",
+            Description = "Restores 50 HP each 15 seconds",
+            timeBetweenCasts = 15,
+            Effect = new(HealingField),
+        },
+    };
 
     public Wall Wall1;
     public Wall Wall2;
@@ -31,6 +39,8 @@ public class Amber : MonoBehaviour
 
     public Barrier SanctuaryBarrier;
     public Barrier VillageBarrier;
+
+    public PlayerStats PlayerStats;
 
     public bool isNight = false;
     public int nightNumber = 0;
@@ -41,6 +51,9 @@ public class Amber : MonoBehaviour
     public float timer2 = 0;
     public float timer3 = 0;
 
+    public SupportSpellForVillage supportSpellForVillage;
+    public SupportSpellForPlayer supportSpellForPlayer;
+
     private void Start()
     {
         Wall1.HP = 100 * (nightNumber/10 + 1);
@@ -48,8 +61,9 @@ public class Amber : MonoBehaviour
         Wall3.HP = 100 * (nightNumber/10 + 1);
         Wall4.HP = 100 * (nightNumber/10 + 1);
 
-    //test
-    activeSupportSpells.Add(supportSpells[0]);
+        //test
+        supportSpellForVillage = supportSpellsForVillage[0];
+        supportSpellForPlayer = supportSpellsForPlayer[0];
     }
     private void Update()
     {
@@ -61,28 +75,37 @@ public class Amber : MonoBehaviour
         {
             //Timers for support spells
             timer1 += Time.deltaTime;
-            if (timer1 >= activeSupportSpells[0].timeBetweenCasts)
+            if (timer1 >= supportSpellForVillage.timeBetweenCasts)
             {
                 timer1 = 0;
 
-                activeSupportSpells[0].Effect();
+                supportSpellForVillage.Effect();
             }
 
-            //timer2 += Time.deltaTime;
-            //if (timer2 > activeSupportSpells[1].timeBetweenCasts)
-            //{
-            //    timer2 = 0;
+            timer2 += Time.deltaTime;
+            if (timer2 > supportSpellForPlayer.timeBetweenCasts)
+            {
+                timer2 = 0;
 
-            //    activeSupportSpells[1].Effect();
+                supportSpellForPlayer.Effect(PlayerStats);
+            }
+
+            //timer3 += Time.deltaTime;
+            //if (timer3 > activeSupportSpells[2].timeBetweenCasts)
+            //{
+            //    timer3 = 0;
+
+            //    activeSupportSpells[2].Effect();
             //}
         }
     }
 
     // Support spells
 
-    public static void HealingField()
+    public static void HealingField(PlayerStats player)
     {
-        
+        player.Heal(50);
+        Debug.Log(player.health);
     }
 
     public static void BuffingField()
@@ -121,9 +144,16 @@ public class Amber : MonoBehaviour
     }
 }
 
-public struct SupportSpell
+public struct SupportSpellForVillage
 {
     public string Name, Description;
     public float timeBetweenCasts;
-    public SupportSpellEffect Effect;
+    public SupportSpellEffectForVillage Effect;
+}
+
+public struct SupportSpellForPlayer
+{
+    public string Name, Description;
+    public float timeBetweenCasts;
+    public SupportSpellEffectForPlayer Effect;
 }
