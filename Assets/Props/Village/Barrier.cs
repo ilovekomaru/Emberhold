@@ -1,33 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Barrier : MonoBehaviour
 {
     public int HP = 0;
+    public int nightNum = 0;
     public bool isNight = false;
     private void Update()
     {
-        GetComponent<SphereCollider>().enabled = isNight;
+        HP = !isNight ? 0 : HP;
+        GetComponent<SphereCollider>().enabled = HP > 0;
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        //Material color: 898989 => DCDCDC => wait ~0.5s => 898989
-
-        //if (collision.gameObject.CompareTag("Enemy's attack"))
+        //if (other.gameObject.CompareTag("Enemy's attack"))
         //{
-        //    gameObject.GetComponent<MeshRenderer>().material.color = new Color(220, 220, 220, 50);
-        //    gameObject.GetComponent<MeshRenderer>().material.color = new Color(137, 137, 137, 50);
+        //    // HP -= other.gameObject.GetComponent<EnemyStats>.damage;
         //}
 
-        /*else*/if (collision.gameObject.CompareTag("Player") && gameObject.name == "VillageBarrier")
+        if (other.gameObject.GetComponents<ProjectileDamageStats>() != null)
         {
-            GetComponent<SphereCollider>().enabled = false;
+            other.gameObject.SetActive(false);
         }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        GetComponent<SphereCollider>().enabled = true;
     }
 }

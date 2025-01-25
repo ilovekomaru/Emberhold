@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 // Amber is actually VillageManager
 
-public delegate void SupportSpellEffectForVillage();
+public delegate void SupportSpellEffectForVillage(Component component);
 public delegate void SupportSpellEffectForPlayer(PlayerStats player);
 public class Amber : MonoBehaviour
 {
@@ -70,6 +70,9 @@ public class Amber : MonoBehaviour
         SanctuaryBarrier.isNight = isNight;
         VillageBarrier.isNight = isNight;
 
+        SanctuaryBarrier.nightNum = nightNumber;
+        VillageBarrier.nightNum = nightNumber;
+
         //Night mode
         if (isNight)
         {
@@ -79,7 +82,7 @@ public class Amber : MonoBehaviour
             {
                 timer1 = 0;
 
-                supportSpellForVillage.Effect();
+                supportSpellForVillage.Effect(new Wall());
             }
 
             timer2 += Time.deltaTime;
@@ -105,7 +108,6 @@ public class Amber : MonoBehaviour
     public static void HealingField(PlayerStats player)
     {
         player.Heal(50);
-        Debug.Log(player.health);
     }
 
     public static void BuffingField()
@@ -113,11 +115,16 @@ public class Amber : MonoBehaviour
 
     }
 
-    public static void WallReconstruction()
+    public static void WallReconstruction(Component component)
     {
         wallReconstructionTime += 1;
     }
-    
+
+    public static void CreateVillageBarrier(Barrier barrier)
+    {
+        //barrier.HP = 100 * (barrier.nightNum/10);
+    }
+
     //Class methods
     public void NightStarts()
     {
