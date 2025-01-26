@@ -94,11 +94,13 @@ public class MagicWeapon : MonoBehaviour
         Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x,y, 0f);
 
         GameObject currentBullet = Instantiate(currentSpell.prefab, attackPoint.position, Quaternion.identity);
+        currentBullet.tag = "Enemy's attack";
 
         currentBullet.transform.forward = directionWithSpread.normalized;
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized * currentSpell.shootForce, ForceMode.Impulse);
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized * currentSpell.upwardForce, ForceMode.Impulse);
-        
+        currentBullet.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
         ProjectileDamageStats currentBulletStats = currentBullet.AddComponent<ProjectileDamageStats>();
         currentBulletStats.SetDamage(CalculateDamage());
 

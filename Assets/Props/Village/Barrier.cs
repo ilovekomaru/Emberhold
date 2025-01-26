@@ -6,24 +6,20 @@ using UnityEngine;
 
 public class Barrier : MonoBehaviour
 {
-    public int HP = 0;
-    public int nightNum = 0;
+    public int HP = 1;
     public bool isNight = false;
+
     private void Update()
     {
-        HP = !isNight ? 0 : HP;
-        GetComponent<SphereCollider>().enabled = HP > 0;
+        gameObject.GetComponent<MeshRenderer>().enabled = HP > 0;
+        gameObject.GetComponent<SphereCollider>().enabled = isNight && HP > 0;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        //if (other.gameObject.CompareTag("Enemy's attack"))
-        //{
-        //    // HP -= other.gameObject.GetComponent<EnemyStats>.damage;
-        //}
-
-        if (other.gameObject.GetComponents<ProjectileDamageStats>() != null)
+        if (isNight && other.gameObject.CompareTag("Enemy's attack"))
         {
-            other.gameObject.SetActive(false);
+            HP -= (int)other.gameObject.GetComponent<ProjectileDamageStats>().projectileDamage.MagiDamage;
+            Destroy(other.gameObject);
         }
     }
 }

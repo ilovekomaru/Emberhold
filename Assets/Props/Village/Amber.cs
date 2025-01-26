@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 // Amber is actually VillageManager
 
-public delegate void SupportSpellEffectForVillage(Component component);
+public delegate void SupportSpellEffectForVillage(Barrier component);
 public delegate void SupportSpellEffectForPlayer(PlayerStats player);
 public class Amber : MonoBehaviour
 {
@@ -16,9 +16,16 @@ public class Amber : MonoBehaviour
         new SupportSpellForVillage
         {
             Name = "Wall reconstruction",
-            Description = "Use for it for 2 night times to restore walls",
+            Description = "Use it for 2 night times to restore walls",
             timeBetweenCasts = 100,
             Effect = new(WallReconstruction),
+        },
+        new SupportSpellForVillage
+        {
+            Name = "Create sanctuary barrier",
+            Description = "",
+            timeBetweenCasts = 100,
+            Effect = new(CreateVillageBarrier),
         },
     };
     public List<SupportSpellForPlayer> supportSpellsForPlayer = new List<SupportSpellForPlayer>()
@@ -32,13 +39,12 @@ public class Amber : MonoBehaviour
         },
     };
 
+    public int HP;
+
     public Wall Wall1;
     public Wall Wall2;
     public Wall Wall3;
     public Wall Wall4;
-
-    public Barrier SanctuaryBarrier;
-    public Barrier VillageBarrier;
 
     public PlayerStats PlayerStats;
 
@@ -67,11 +73,6 @@ public class Amber : MonoBehaviour
     }
     private void Update()
     {
-        SanctuaryBarrier.isNight = isNight;
-        VillageBarrier.isNight = isNight;
-
-        SanctuaryBarrier.nightNum = nightNumber;
-        VillageBarrier.nightNum = nightNumber;
 
         //Night mode
         if (isNight)
@@ -82,7 +83,7 @@ public class Amber : MonoBehaviour
             {
                 timer1 = 0;
 
-                supportSpellForVillage.Effect(new Wall());
+                supportSpellForVillage.Effect(new Barrier());
             }
 
             timer2 += Time.deltaTime;
@@ -100,6 +101,14 @@ public class Amber : MonoBehaviour
 
             //    activeSupportSpells[2].Effect();
             //}
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy's attack"))
+        {
+            HP -= (int)collision.gameObject.GetComponent<ProjectileDamageStats>().projectileDamage.MagiDamage;
         }
     }
 
@@ -122,7 +131,8 @@ public class Amber : MonoBehaviour
 
     public static void CreateVillageBarrier(Barrier barrier)
     {
-        //barrier.HP = 100 * (barrier.nightNum/10);
+        barrier.HP = 100;
+        barrier.isNight = true;
     }
 
     //Class methods
@@ -134,7 +144,7 @@ public class Amber : MonoBehaviour
     public void NightEnds()
     {
         isNight = false;
-
+        Debug.Log(wallReconstructionTime);
         if (wallReconstructionTime >= 2)
         {
             wallReconstructionTime = 0;

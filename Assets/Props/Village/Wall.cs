@@ -33,9 +33,10 @@ public class Wall : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        print("Collision!");
         if (collision.gameObject.CompareTag("Enemy's attack"))
         {
-            //HP -= collision.gameObject.GetComponent<>();       //Enemy attack stats
+            HP -= (int)collision.gameObject.GetComponent<EnemyStats>().damage;       //Enemy attack stats
         }
     }
 }
