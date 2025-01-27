@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 471184993545937653}
   - component: {fileID: 8699870393564709700}
   m_Layer: 3
-  m_Name: TreeParticleHolder
+  m_Name: '!TreeParticleHolder'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

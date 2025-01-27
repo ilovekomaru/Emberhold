@@ -36,13 +36,11 @@ public class PropsGenerator : MonoBehaviour
                 continue;
 
             if (hit.point.x > raySett.xRangeException.x && hit.point.x < raySett.xRangeException.y)
-                continue;
-
-            if (hit.point.z > raySett.zRangeException.x && hit.point.z < raySett.zRangeException.y)
-                continue;
+                if (hit.point.z > raySett.zRangeException.x && hit.point.z < raySett.zRangeException.y)
+                    continue;
 
             GameObject instantiatedPrefab = (GameObject)PrefabUtility.InstantiatePrefab(prefabs[i % prefabs.Count], transform);
-            instantiatedPrefab.transform.position = hit.point;
+            instantiatedPrefab.transform.position = hit.point + Vector3.down * 0.5f;
             instantiatedPrefab.transform.Rotate(Vector3.up, UnityEngine.Random.Range(prefabVar.rotationRange.x, prefabVar.rotationRange.y), Space.Self);
             instantiatedPrefab.transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation * Quaternion.FromToRotation(instantiatedPrefab.transform.up, hit.normal), prefabVar.rotateTowardsNormal);
             instantiatedPrefab.transform.localScale = new Vector3(
