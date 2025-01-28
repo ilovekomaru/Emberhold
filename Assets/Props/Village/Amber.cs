@@ -11,6 +11,8 @@ public delegate void SupportSpellEffectForVillage(Barrier component);
 public delegate void SupportSpellEffectForPlayer(PlayerStats player);
 public class Amber : MonoBehaviour
 {
+    public UnityEvent<int> onNightStart;
+
     public List<SupportSpellForVillage> supportSpellsForVillage = new List<SupportSpellForVillage>()
     {
         new SupportSpellForVillage
@@ -108,7 +110,7 @@ public class Amber : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy's attack"))
         {
-            HP -= (int)collision.gameObject.GetComponent<ProjectileDamageStats>().projectileDamage.MagiDamage;
+            HP -= (int)collision.gameObject.GetComponent<EnemyStats>().damage;
         }
     }
 
@@ -140,6 +142,8 @@ public class Amber : MonoBehaviour
     {
         nightNumber++;
         isNight = true;
+
+        onNightStart.Invoke(nightNumber*50);
     }
     public void NightEnds()
     {

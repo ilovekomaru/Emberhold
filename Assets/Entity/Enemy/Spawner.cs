@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    int collisions;
     public GameObject enemyPrefab;
-    public void NightStarts(int nightNumber)
+    private void OnCollisionEnter(Collision collision)
     {
-        for (int i = 0; i < nightNumber * 50; i++)
+        collisions++;
+        if (collisions > 25)
         {
-            Instantiate(enemyPrefab, parent: this.gameObject.transform, position: );
+            GameOver();
         }
+    }
+
+    private void GameOver()
+    {
+
     }
 }

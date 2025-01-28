@@ -11,6 +11,10 @@ public class EnemySpawn : MonoBehaviour
 {
     public List<SpawnerSpawnBoundaries> spawnBoundaries;
 
+    private void Start()
+    {
+        Spawn(200);
+    }
     public void Spawn(int spawner)
     {
         SetupCollider();
