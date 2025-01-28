@@ -23,6 +23,7 @@ public class SkeletonAI : MonoBehaviour
     private int currentWall;
     private double searchNodeTime = 0;
     private double searchWallTime = 0;
+    private double damageWallTime = 0;
     private float currentAgentSpeed = 0.5f;
 
     private void Start()
@@ -99,10 +100,6 @@ public class SkeletonAI : MonoBehaviour
                     currentAgentSpeed = 0.6f;
                     agent.SetDestination(target.transform.position);
                 }
-                if (Vector3.Distance(this.transform.position, target.transform.position) <= behaviour.wallAttackDistance)
-                {
-                    //Attack animation and damage TODO
-                }
 
                 agent.speed = currentAgentSpeed * agentSpeed;
                 animator.SetFloat("Speed", currentAgentSpeed);
@@ -113,7 +110,6 @@ public class SkeletonAI : MonoBehaviour
         searchNodeTime += Time.deltaTime;
         Debug.Log(searchNodeTime);
         searchWallTime += Time.deltaTime;
-
     }
 
     private bool SearchNode(out Vector3 newPos)
