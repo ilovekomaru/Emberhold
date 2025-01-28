@@ -120,9 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats:
-    health: 14
+    health: 12
     minDamage: 2
     isTree: 0
-    resourceCount: 5
+    resourceCount: 2
   prefab: {fileID: 6927510348289496683, guid: 4c6ba4a608eca9341b4c86baac234399, type: 3}
-  missPrefab: {fileID: 0}
+  missPrefab: {fileID: 3698187987406427928, guid: 259d2cebcca4e944890c883723d4f2c3,
+    type: 3}

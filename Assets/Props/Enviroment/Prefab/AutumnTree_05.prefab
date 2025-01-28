@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7670178711110718085}
   - component: {fileID: 5590380765211027023}
   - component: {fileID: -1386959914666374428}
+  - component: {fileID: -8864877683481912505}
   m_Layer: 3
   m_Name: AutumnTree_05
   m_TagString: Resource
@@ -106,3 +107,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5271654807360852982, guid: 6f20933e8e5e7db40bd1bc5d0fb22435, type: 3}
+--- !u!114 &-8864877683481912505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6239167598777059226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e1b39d193a43a4fb7ef4ca399d7f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    health: 10
+    minDamage: 4
+    isTree: 1
+    resourceCount: 5
+  prefab: {fileID: 6927510348289496683, guid: d34349da0c2c5174184c692503c3d049, type: 3}
+  missPrefab: {fileID: 3698187987406427928, guid: 259d2cebcca4e944890c883723d4f2c3,
+    type: 3}

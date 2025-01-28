@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshCollider))]
 public class Resource : MonoBehaviour
 {
     public ResourceStats stats;
@@ -18,7 +19,13 @@ public class Resource : MonoBehaviour
 
     private void Awake()
     {
-        particleHolder = Instantiate(prefab, transform);
+        Invoke("Instant", 1f);
+    }
+
+    private void Instant()
+    {
+
+        particleHolder = Instantiate(prefab, this.transform.position, Quaternion.identity);
         particles = particleHolder.GetComponent<ParticleSystem>();
         missParticle = Instantiate(missPrefab, this.transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
     }
