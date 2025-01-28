@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2733119029220407321}
   - component: {fileID: 146659523138555091}
   - component: {fileID: -3335823299880832586}
+  - component: {fileID: -7044110028626274938}
   m_Layer: 3
   m_Name: SpringTree_01
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,3 +107,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -694493205875825379, guid: c6e86d7f366dfe642b5ed3dc6793c30c, type: 3}
+--- !u!114 &-7044110028626274938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804244151549930758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e1b39d193a43a4fb7ef4ca399d7f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    health: 8
+    minDamage: 1
+    isTree: 1
+    resourceCount: 3
+  prefab: {fileID: 6927510348289496683, guid: d34349da0c2c5174184c692503c3d049, type: 3}
+  missPrefab: {fileID: 3698187987406427928, guid: 259d2cebcca4e944890c883723d4f2c3,
+    type: 3}

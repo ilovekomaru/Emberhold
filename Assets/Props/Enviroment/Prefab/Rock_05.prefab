@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 8947607110731227970}
   - component: {fileID: 5441354229172923623}
   - component: {fileID: 7811323809805047853}
+  - component: {fileID: 3036071627810593102}
+  - component: {fileID: 2352104078621124767}
   m_Layer: 3
   m_Name: Rock_05
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,9 +28,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8604014862111390200}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,3 +85,45 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3036071627810593102
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8604014862111390200}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -9097707048515180682, guid: a1ac826ff8dba9441b13babd90f514fc, type: 3}
+--- !u!114 &2352104078621124767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8604014862111390200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e1b39d193a43a4fb7ef4ca399d7f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    health: 12
+    minDamage: 2
+    isTree: 0
+    resourceCount: 2
+  prefab: {fileID: 6927510348289496683, guid: 4c6ba4a608eca9341b4c86baac234399, type: 3}
+  missPrefab: {fileID: 3698187987406427928, guid: 259d2cebcca4e944890c883723d4f2c3,
+    type: 3}

@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 6789698604872080942}
   - component: {fileID: 7608270257497739659}
   - component: {fileID: 5652851188979361089}
+  - component: {fileID: 5442179749578803812}
+  - component: {fileID: 6907386650077987755}
   m_Layer: 3
   m_Name: WinterTree_05
-  m_TagString: Untagged
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,3 +85,45 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5442179749578803812
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6156994931936052372}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2987645619460377769, guid: 66bacc6568f36dc4f9b78f75702229f4, type: 3}
+--- !u!114 &6907386650077987755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6156994931936052372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e1b39d193a43a4fb7ef4ca399d7f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    health: 24
+    minDamage: 6
+    isTree: 1
+    resourceCount: 10
+  prefab: {fileID: 6927510348289496683, guid: d34349da0c2c5174184c692503c3d049, type: 3}
+  missPrefab: {fileID: 3698187987406427928, guid: 259d2cebcca4e944890c883723d4f2c3,
+    type: 3}
